@@ -1,0 +1,79 @@
+{% extends "MediaCenter.html" %}
+
+{% block title %}Suchergebnisse{% endblock %}
+
+{% block main %}
+
+<form name=resultform action=AddMovie method=POST>
+
+<script>
+	function selectMovie( original, german, year ) {
+		document.manual.Original.value = original;
+		document.manual.German.value = german;
+		document.manual.Year.value = year;
+		}
+</script>
+
+<div align=center style="border:1pt solid yellow; width:500px; text-align:left;">
+{% autoescape off %}
+{% for movie in movies %}
+<input name=Movie type=radio value='{{ movie.movieID }}' onClick="selectMovie('{{ movie.original }}','{{ movie.german }}','{{ movie.year }}');"/>{{ movie.year }}: <b>{{ movie.original }}</b> / <i>{{ movie.german }}</i><br/>
+{% endfor %}
+{% endautoescape %}
+</div>
+
+<br/>
+
+<script>
+	function selectPicture( url ) {
+		document.manual.URL.value = url;
+		}
+</script>
+
+<div align=center style="border:1pt solid yellow; width:600px;">
+{% for pic in pictures %}
+<input name=Picture type=radio value='{{ pic }}' onClick="selectPicture('{{ pic }}');"/><img src='{{ pic }}' border=0 onClick="selectPicture('{{ pic }}');"/>
+{% endfor %}
+</div>
+
+</form>
+
+<hr/>
+
+<script>
+	function GooglePictures() {
+		window.open( 'http://www.google.com/search?tbm=isch&q='+document.upload.Original.value+'+movie' );
+		}
+</script>
+
+<form name=manual action=AddMovie method=POST>
+<table>
+	<tr>
+		<td>Originaltitel:</td>
+		<td><input type=text name=Original value="" style="width:200px;" /></td>
+	</tr>
+	<tr>
+		<td>Deutscher Titel:</td>
+		<td><input type=text name=German value="" style="width:200px;" /></td>
+	</tr>
+	<tr>
+		<td>Erscheinungsjahr:</td>
+		<td><input type=text name=Year value="" style="width:200px;" /></td>
+	</tr>
+	<tr>
+		<td>Bild (URL; Doppelklick -> Google):</td>
+		<td><input type=text name=URL value="" style="width:200px;" onDblClick="GooglePictures();" /></td>
+	</tr>
+	<tr>
+		<td colspan=2 align=right>
+		<input type=submit value=Speichern />
+		</td>
+	</tr>
+</table>
+</form>
+
+{% endblock %}
+</body>
+
+</html>
+

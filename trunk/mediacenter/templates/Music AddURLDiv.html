@@ -1,0 +1,82 @@
+<style>
+	#AddURLDiv	{
+			background-color: #0000aa;
+			position:	fixed;
+			top:		300px;
+			width:		600px;
+			text-align:	right;
+			overflow:	hidden;
+			visibility:	hidden;
+			padding:	8px;
+			}
+	#AddURLDiv table {
+			border:1px solid #ffffff;
+			width:		100%;
+			}
+	#AddURLDiv td	{
+			font-size:	9pt; 
+			color:		white;
+			}
+	#AddURLDiv input:hover {
+			background-color: #ff0000;
+			}
+	input.AddURLTitle {
+			border:		none;
+			width:		400px;
+			text-align:	center;
+			background-color: #0000aa;
+			color:		white;
+			}
+	input.AddURLURL {
+			width:		400px;
+			}
+</style>
+
+<div id=AddURLDiv>
+	<form name=AddURLForm action=AddOnlineMusic method=POST>
+		<a href="javascript:AddURLClose();"><img src="/window_close.png" height=20 /></a>
+		<input type=hidden name=ID value='' />
+		<table cellpadding=5 cellspacing=0>
+			<tr>
+				<td>Titel:</td>
+				<td><input type=text name=Title class=AddURLTitle value='' /></td>
+			</tr>
+			<tr>
+				<td>URL hinzuf&uuml;gen: </td>
+				<td>
+					<input type=text name=URL class=AddURLURL value='' />
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2><hr/></td>
+			</tr>
+			<tr>
+				<td><input type=button value=Schlie&szlig;en onClick="AddURLClose();" /></td>
+				<td align=right><input type=submit value=Hinzuf&uuml;gen /></td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<script>
+	AddURLDiv = document.getElementById('AddURLDiv');
+	AddURLDiv.style.left = (document.body.clientWidth - AddURLDiv.offsetWidth) / 2;
+
+	function AddURL( titleid, composer, performer, album, title ) {
+		document.AddURLForm.ID.value = titleid;
+		document.AddURLForm.URL.value = '';
+		s = '';
+		if ( composer != '' ) { s = composer+' / '; }
+		if ( performer != '' ) { s += performer+' - '; }
+		if ( album != '' ) { s += album+': '; }
+		s += title;
+		document.AddURLForm.Title.value = s;
+		AddURLDiv = document.getElementById('AddURLDiv');
+		AddURLDiv.style.visibility = 'visible';
+		document.AddURLForm.URL.focus();
+		}
+
+	function AddURLClose() {
+		document.getElementById('AddURLDiv').style.visibility='hidden';
+		}
+</script>
