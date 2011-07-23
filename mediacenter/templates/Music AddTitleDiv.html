@@ -1,0 +1,76 @@
+<style>
+	#AddTitleDiv	{
+			background-color: #0000aa;
+			position:	fixed;
+			top:		300px;
+			text-align:	right;
+			overflow:	hidden;
+			visibility:	hidden;
+			padding:	8px;
+			}
+	#AddTitleDiv table {
+			border:1px solid #ffffff;
+			width:		100%;
+			}
+	#AddTitleDiv td	{
+			font-size:	9pt; 
+			color:		white;
+			}
+	#AddTitleDiv input:hover {
+			background-color: #ff0000;
+			}
+</style>
+
+<div id=AddTitleDiv>
+	<form name=AddTitleForm action="." method=POST>
+		<a href="javascript:AddTitleClose();"><img src="/window_close.png" height=20 /></a>
+		<table cellpadding=5 cellspacing=0>
+			<tr>
+				<td>Komponist</td>
+				<td><input type=text name=Composer style="width:200px;" value="{{ Composer }}" /></td>
+			</tr>
+			<tr>
+				<td>Darbietender K&uuml;nstler</td>
+				<td><input type=text name=Performer style="width:200px;" value="{{ Performer }}" /></td>
+			</tr>
+			<tr>
+				<td>Album</td>
+				<td><input type=text name=Album style="width:200px;" value="{{ Album }}" /></td>
+			</tr>
+			<tr>
+				<td>Nummer</td>
+				<td><input type=text name=Track style="width:200px;" value="{{ Track }}" /></td>
+			</tr>
+			<tr>
+				<td>Titel</td>
+				<td><input type=text name=Title style="width:200px;" value="{{ Title }}" /></td>
+			</tr>
+			<tr>
+				<td>URL</td>
+				<td><input type=text name=URL style="width:200px;" value="{{ URL }}" /></td>
+			</tr>
+			<tr>
+				<td colspan=2><hr/></td>
+			</tr>
+			<tr>
+				<td><input type=button value=Schlie&szlig;en onClick="AddTitleClose();" /></td>
+				<td align=right><input type=submit value=Speichern /></td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<script>
+	AddTitleDiv = document.getElementById('AddTitleDiv');
+	AddTitleDiv.style.left = (document.body.clientWidth - AddTitleDiv.offsetWidth) / 2;
+
+	function AddTitle() {
+		AddTitleDiv = document.getElementById('AddTitleDiv');
+		AddTitleDiv.style.visibility = 'visible';
+		document.AddTitleForm.Composer.focus();
+		}
+
+	function AddTitleClose() {
+		document.getElementById('AddTitleDiv').style.visibility='hidden';
+		}
+</script>

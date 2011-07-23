@@ -1,0 +1,55 @@
+<html>
+
+<head>
+	<title>MediaCenter</title>
+</head>
+
+<style type="text/css">
+	a.green	{
+		text-decoration: none;
+		}
+	a.green:hover {
+		background:	#22ff22;
+		color:		#ff22ff;
+		text-decoration: none;
+		}
+	tr.Hover:hover {
+		background:	#4cbafb;
+		font-color:	#234956;
+		}
+	td	{
+		border:		none;
+		max-width:	250px;
+		}
+</style>
+
+<body bgcolor="#55bb33">
+
+<br/><br/>
+
+<div align=center>
+<table>
+	<tr>
+		<td>Musik:</td>
+		<td><a class=green href="../Music/">Titel</a>, <a class=green href="../Music/Performers">K&uuml;nstler</a>, <a class=green href="../Music/Albums">Alben</a></td>
+	</tr>
+	<tr>
+		<td>Filme:</td>
+		<td><a class=green href="../Movies/">Titel</a></td>
+	</tr>
+</table>
+</div>
+<hr/>
+
+<center>
+
+<h1>{% block title %}{% endblock %}</h1>
+<hr/>
+<br/>
+
+{% block main %}{% endblock %}
+
+</body>
+
+</html>
+
