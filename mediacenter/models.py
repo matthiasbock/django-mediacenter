@@ -23,12 +23,29 @@ class Locals(models.Model):
     class Meta:
         db_table = u'Locals'
 
+class Movies(models.Model):
+    id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
+    original = models.CharField(max_length=300, db_column='Original') # Field name made lowercase.
+    german = models.CharField(max_length=300, db_column='German') # Field name made lowercase.
+    year = models.IntegerField(null=True, db_column='Year', blank=True) # Field name made lowercase.
+    icon = models.TextField(db_column='Icon', blank=True) # Field name made lowercase.
+    rating = models.CharField(max_length=300, db_column='Rating', blank=True) # Field name made lowercase.
+    class Meta:
+        db_table = u'Movies'
+
 class Performers(models.Model):
     id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
     name = models.CharField(max_length=300, db_column='Name') # Field name made lowercase.
     icon = models.TextField(db_column='Icon', blank=True) # Field name made lowercase.
     class Meta:
         db_table = u'Performers'
+
+class Streams(models.Model):
+    id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
+    title = models.IntegerField(db_column='Title') # Field name made lowercase.
+    url = models.CharField(max_length=600, db_column='URL') # Field name made lowercase.
+    class Meta:
+        db_table = u'Streams'
 
 class Titles(models.Model):
     id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
@@ -49,32 +66,4 @@ class Urls(models.Model):
     complete = models.IntegerField(null=True, db_column='Complete', blank=True) # Field name made lowercase.
     class Meta:
         db_table = u'URLs'
-
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#     * Rearrange models' order
-#     * Make sure each model has one field with primary_key=True
-# Feel free to rename the models, but don't rename db_table values or field names.
-#
-# Also note: You'll have to insert the output of 'django-admin.py sqlcustom [appname]'
-# into your database.
-
-from django.db import models
-
-class Movies(models.Model):
-    id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
-    original = models.CharField(max_length=300, db_column='Original') # Field name made lowercase.
-    german = models.CharField(max_length=300, db_column='German') # Field name made lowercase.
-    year = models.IntegerField(null=True, db_column='Year', blank=True) # Field name made lowercase.
-    icon = models.TextField(db_column='Icon', blank=True) # Field name made lowercase.
-    rating = models.CharField(max_length=300, db_column='Rating', blank=True) # Field name made lowercase.
-    class Meta:
-        db_table = u'Movies'
-
-class Streams(models.Model):
-    id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
-    title = models.IntegerField(db_column='Title') # Field name made lowercase.
-    url = models.CharField(max_length=600, db_column='URL') # Field name made lowercase.
-    class Meta:
-        db_table = u'Streams'
 

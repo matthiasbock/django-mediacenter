@@ -17,7 +17,7 @@ def Listing( request ):
 	params = {}
 	params["rows"] = []
 	col = cols
-	for M in Movies.objects.using( MovieBaseDB ).all().order_by("original"):
+	for M in Movies.objects.using(MediaCenterDB).all().order_by("original"):
 		col += 1
 		if col > cols:
 			col = 1
@@ -28,7 +28,7 @@ def Listing( request ):
 
 def Icon( request ):
 	try:
-		Icon = Movies.objects.using( MovieBaseDB ).get( id=request.GET.get("ID") ).icon
+		Icon = Movies.objects.using(MediaCenterDB).get( id=request.GET.get("ID") ).icon
 		mime = "image/jpeg"
 	except:
 		Icon = open("/usr/share/icons/gnome/256x256/actions/system-search.png", "r").read()
@@ -72,7 +72,7 @@ def AddMovie( request ):
 	else:
 		Picture = None
 
-	Movies.objects.using( MovieBaseDB ).create( original=request.POST.get("Original"), german=request.POST.get("German"), year=request.POST.get("Year"), icon=Picture, rating=None )
+	Movies.objects.using(MediaCenterDB).create( original=request.POST.get("Original"), german=request.POST.get("German"), year=request.POST.get("Year"), icon=Picture, rating=None )
 	return HttpResponseRedirect(".")
 
 
@@ -81,11 +81,11 @@ def AddStream( request ):
 	if request.method == "GET":
 		params = {}
 		ID = request.GET.get("ID")
-		params["Title"] = Movies.objects.using( MovieBaseDB ).get( id=ID )
+		params["Title"] = Movies.objects.using(MediaCenterDB).get( id=ID )
 		return render_to_response("AddURL.html", params)
 
 	elif request.method == "POST":
-		Streams.objects.using( MovieBaseDB ).create( title=request.POST.get("ID"), url=request.POST.get("URL") )
+		Streams.objects.using(MediaCenterDB).create( title=request.POST.get("ID"), url=request.POST.get("URL") )
 		return HttpResponseRedirect(".")
 
 
