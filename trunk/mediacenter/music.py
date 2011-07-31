@@ -11,10 +11,10 @@ import httplib, os
 
 def export_title( T ):				# exportiert ein Template-übergebbares Dictionary für diesen Title-Eintrag
 	URLs = []
-	for URL in Urls.objects.using( MusicBaseDB ).filter( title=T.id ):
+	for URL in Urls.objects.using(MediaCenterDB).filter( title=T.id ):
 #		URLs.append( { "url":URL.url+"&use=cache", "hoster":"Local" } )
 		URLs.append( { "url":URL.url, "hoster":URL.url.replace("http://","").replace(".","/").split("/")[1] } )
-	for local in Locals.objects.using( MusicBaseDB ).filter( title=T.id ):
+	for local in Locals.objects.using(MediaCenterDB).filter( title=T.id ):
 		URLs.append( { "url":FileBase.File( ID=local.filebaseid ).FullPath(), "hoster":"FileBase" } )
 	Track = T.track
 	if Track == 0:
@@ -26,7 +26,7 @@ def TitleList( request ):
 	if request.method == "GET":
 		params = {}
 		params["Titles"] = []
-		for T in Titles.objects.using( MusicBaseDB ).all().order_by('album','track','composer','performer','title'):
+		for T in Titles.objects.using(MediaCenterDB).all().order_by('album','track','composer','performer','title'):
 			params["Titles"].append( export_title(T) )
 		return render_to_response("Music.html", params)
 	elif request.method == "POST":
@@ -34,10 +34,10 @@ def TitleList( request ):
 			Track = int(request.POST.get("Track"))
 		except:
 			Track = 0
-		Titles.objects.using( MusicBaseDB ).create( composer=request.POST.get("Composer"), performer=request.POST.get("Performer"), album=request.POST.get("Album"), track=Track, title=request.POST.get("Title") )
-		T = Titles.objects.using( MusicBaseDB ).get( composer=request.POST.get("Composer"), performer=request.POST.get("Performer"), album=request.POST.get("Album"), title=request.POST.get("Title") )
+		Titles.objects.using(MediaCenterDB).create( composer=request.POST.get("Composer"), performer=request.POST.get("Performer"), album=request.POST.get("Album"), track=Track, title=request.POST.get("Title") )
+		T = Titles.objects.using(MediaCenterDB).get( composer=request.POST.get("Composer"), performer=request.POST.get("Performer"), album=request.POST.get("Album"), title=request.POST.get("Title") )
 		if request.POST.get("URL") != "":
-			Urls.objects.using( MusicBaseDB ).create( title=T.id, url=request.POST.get("URL") )
+			Urls.objects.using(MediaCenterDB).create( title=T.id, url=request.POST.get("URL") )
 		return HttpResponseRedirect( "Performer?Name="+request.POST.get("Performer") )
 
 
@@ -46,12 +46,12 @@ def AddOnlineMusic( request ):
 	if request.method == "GET":
 		params = {}
 		ID = request.GET.get("ID")
-		params["Title"] = Titles.objects.using( MusicBaseDB ).get( id=ID )
+		params["Title"] = Titles.objects.using(MediaCenterDB).get( id=ID )
 		return render_to_response("AddOnlineMusic.html", params)
 
 	elif request.method == "POST":
-		Urls.objects.using( MusicBaseDB ).create( title=request.POST.get("ID"), url=request.POST.get("URL") )
-		return HttpResponseRedirect("Performer?Name="+Titles.objects.using( MusicBaseDB ).get( id=request.POST.get("ID") ).performer)
+		Urls.objects.using(MediaCenterDB).create( title=request.POST.get("ID"), url=request.POST.get("URL") )
+		return HttpResponseRedirect("Performer?Name="+Titles.objects.using(MediaCenterDB).get( id=request.POST.get("ID") ).performer)
 
 
 def LocalMusic( request ):
@@ -64,13 +64,13 @@ def AddLocalMusic( request ):
 	if request.method == "GET":
 		params = {}
 #		ID = request.GET.get("ID") 			blablablabla
-#		params["Title"] = Titles.objects.using( MusicBaseDB ).get( id=ID )
+#		params["Title"] = Titles.objects.using(MediaCenterDB).get( id=ID )
 		return render_to_response("AddLocal.html", params)
 
 	elif request.method == "POST":
-#		Urls.objects.using( MusicBaseDB ).create( title=request.POST.get("ID"), url=request.POST.get("URL") )
+#		Urls.objects.using(MediaCenterDB).create( title=request.POST.get("ID"), url=request.POST.get("URL") )
 		# nur editieren, erzeugt ist es schon
-		return HttpResponseRedirect("Performer?Name="+Titles.objects.using( MusicBaseDB ).get( id=request.POST.get("ID") ).performer)
+		return HttpResponseRedirect("Performer?Name="+Titles.objects.using(MediaCenterDB).get( id=request.POST.get("ID") ).performer)
 
 
 def LocalUpgrade( request ):
@@ -84,9 +84,9 @@ def LocalUpgrade( request ):
 			fname = os.path.join( root, name )
 			fsize = os.path.getsize( fname )
 			try:
-				Locals.objects.using( MusicBaseDB ).find( filename=fname, filesize=fsize )
+				Locals.objects.using(MediaCenterDB).find( filename=fname, filesize=fsize )
 			except:
-				new = Locals.objects.using( MusicBaseDB ).create( filename=fname, filesize=fsize, md5=largefileMD5(fname) )
+				new = Locals.objects.using(MediaCenterDB).create( filename=fname, filesize=fsize, md5=largefileMD5(fname) )
 				params["new"].append( new.id )
 	return render_to_response("NewLocals.html", params)
 
@@ -97,7 +97,7 @@ def PerformerList( request ):
 
 	params = {}
 	Performer = []
-	for T in Titles.objects.using( MusicBaseDB ).all().order_by( 'performer' ):
+	for T in Titles.objects.using(MediaCenterDB).all().order_by( 'performer' ):
 		if not T.performer in Performer and T.performer != "":
 			Performer.append( T.performer )
 	params["rows"] = []
@@ -121,7 +121,7 @@ def Performer( request ):
 		params = {}
 		params["Performer"] = Name
 		params["Titles"] = []
-		for T in Titles.objects.using( MusicBaseDB ).filter( performer=Name ).order_by( 'album','track','composer','title' ):
+		for T in Titles.objects.using(MediaCenterDB).filter( performer=Name ).order_by( 'album','track','composer','title' ):
 			params["Titles"].append( export_title(T) )
 		return render_to_response("Performer.html", params)
 
@@ -136,10 +136,10 @@ def Performer( request ):
 		_Picture = response.read()
 		connection.close()
 		try:
-			Performers.objects.using( MusicBaseDB ).get( name=_Performer ).delete()
+			Performers.objects.using(MediaCenterDB).get( name=_Performer ).delete()
 		except:
 			pass
-		Performers.objects.using( MusicBaseDB ).create( name=_Performer, icon=_Picture )
+		Performers.objects.using(MediaCenterDB).create( name=_Performer, icon=_Picture )
 		return HttpResponseRedirect("Performer?Name="+_Performer)
 
 
@@ -149,7 +149,7 @@ def PerformerIcon( request ):
 	except:
 		Name = "None"
 	try:
-		Icon = Performers.objects.using( MusicBaseDB ).get( name=Name ).icon
+		Icon = Performers.objects.using(MediaCenterDB).get( name=Name ).icon
 		mime = "image/jpeg"
 	except:
 		Icon = open("/usr/share/icons/gnome/256x256/actions/system-search.png", "r").read()
