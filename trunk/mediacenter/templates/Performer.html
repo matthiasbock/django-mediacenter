@@ -2,6 +2,8 @@
 
 {% block title %}{{ Performer }}{% endblock %}
 
+{% block header %}{{ Performer }}{% endblock %}
+
 {% block performer %}
 
 <style>
@@ -11,29 +13,38 @@
 	#Performer a		{
 				text-decoration:	none;
 				}
+	#Performer a:hover	{
+				text-decoration:	underline;
+				}
 </style>
 
 <table id=Performer>
 <tr>
 
 <td>
-<form action=PerformerIcon method=POST>
-	<img src="PerformerIcon?Name={{ Performer }}&get=picture" border=0 width=200 /><br/>
-	<br/>
-	Neues Bild hinterlegen:<br/>
-	<input type=hidden name=Performer value="{{ Performer }}" />
-	<input type=text name=URL />
-	<input type=submit value=Speichern />
-</form>
+	<form action=PerformerIcon method=POST>
+		<img src="PerformerIcon?Name={{ Performer }}&get=picture" border=0 width=200 /><br/>
+		<br/>
+		Neues Bild hinterlegen:<br/>
+		<input type=hidden name=Performer value="{{ Performer }}" />
+		<input type=text name=URL />
+		<input type=submit value=Speichern />
+	</form>
 </td>
 
 <td>
-<a target="_blank" href="http://www.google.com/search?tbm=isch&q={{ Performer|urlencode }}">Suche {{ Performer }} bei <img border=0 src="../static/Google.png" height=15 /> Bilder</a><br/>
-
-<br/>
-
-<a target="_blank" href="http://www.myvideo.de/Videos_A-Z?searchWord={{ Performer|urlencode }}">Suche {{ Performer }} bei <img border=0 src="../static/MyVideo.png" height=15 /></a><br/>
-<a target="_blank" href="http://www.youtube.com/results?gl=DE&hl=de&search_query={{ Performer|urlencode }}">Suche {{ Performer }} bei <img border=0 src="../static/YouTube.png" height=15 /></a><br/>
+	<ul>
+		<li>
+			<a target="_blank" href="http://www.google.com/search?tbm=isch&q={{ Performer|urlencode }}">Suche {{ Performer }} bei <img border=0 src="../static/Google.png" height=15 /> Bilder</a><br/>
+		</li>
+		<br/>
+		<li>
+			<a target="_blank" href="http://www.myvideo.de/Videos_A-Z?searchWord={{ Performer|urlencode }}">Suche {{ Performer }} bei <img border=0 src="../static/MyVideo.png" height=15 /></a><br/>
+		</li>
+		<li>
+			<a target="_blank" href="http://www.youtube.com/results?gl=DE&hl=de&search_query={{ Performer|urlencode }}">Suche {{ Performer }} bei <img border=0 src="../static/YouTube.png" height=15 /></a><br/>
+		</li>
+	</ul>
 </td>
 
 </tr>
