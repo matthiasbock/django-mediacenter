@@ -61,7 +61,7 @@
 		<td align=center> {{ Title.title }} </td>
 		<td>
 		{% for URL in Title.URLs %}
-		<a class=Provider target="_blank" href="/Django/Proxy/Play/{{ Title.performer }}%20-%20{{ Title.title }}?URL={{ URL.url|urlencode }}"><img border=0 src="/Django/MediaCenter/static/{{ URL.hoster }}.png" height=15 /></a>
+		<a class=Provider target="_blank" href="/Django/Proxy/Play/{{ Title.performer }}%20-%20{{ Title.title }}.flv?URL={{ URL.url|urlencode }}"><img border=0 src="/Django/MediaCenter/static/{{ URL.hoster }}.png" height=15 /></a>
 		{% endfor %}
 		</td>
 	</tr>
