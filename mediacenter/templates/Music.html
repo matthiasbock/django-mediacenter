@@ -28,9 +28,15 @@
 	#Footer #Expire		{
 				width:			30px;
 				}
+	#Footer #Save		{
+				opacity:		.4;
+				}
+	#Footer #Save:hover	{
+				opacity:		1;
+				}
 	iframe.DoInBackground	{
 				position:		fixed;
-				visibility:		hidden;
+/*				visibility:		hidden;*/
 				}
 </style>
 
@@ -46,12 +52,20 @@
 		document.getElementById("CachedSize").innerHTML = "0";
 		}
 
+	function CachePropertyChanged() {
+		document.getElementById('Save').style.opacity = '1';
+		}
+
 	function SetupCache() {
-		document.getElementById('CacheIFrame').src = "SetupCache";
+		use = false;
+		if ( document.getElementyById('Use').checked ) {
+			use = true;
+			}
+		document.getElementById('CacheIFrame').src = "SetupCache?Use="+use+"&Expires="+document.getElementyById('Expires').value;
 		}
 
 	function CacheSetUp() {
-		alert("Saved.");
+		document.getElementById('Save').style.opacity = '.4';
 		}
 
 	function CacheIFrameLoaded(iframe) {
@@ -65,10 +79,10 @@
 </script>
 
 <div id=Footer>
-	<input type=checkbox id=Use checked /> Use cache. 
+	<input type=checkbox id=Use onClick="CachePropertyChanged();" {{ UseCache }} /> Use cache. 
 
-	Clear cache after <input type=text id=Expire value="3" /> days. 
-	<input type=button value=Save onClick="SetupCache();"/>
+	Clear cache after <input type=text id=Expire value="{{ CacheExpires }}" onKeyDown="CachePropertyChanged();" /> days. 
+	<input type=button value=Save id=Save onClick="SetupCache();"/>
 
 	<label id=CachedTitles>{{ CachedTitles }}</label> titles in cache (<label id=CachedSize>{{ CachedSize }}</label> MB). 
 	<input type=button value="Clear cache" onClick="ClearCache();"/>
