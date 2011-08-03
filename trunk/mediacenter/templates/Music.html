@@ -4,63 +4,19 @@
 
 {% block main %}
 
+<!-- Performer -->
 {% block performer %}{% endblock %}
+<!-- end Performer -->
 
+<!-- Title List -->
 {% include 'Music.AddTitle.div.html' %}
 {% include 'Music.AddURL.div.html' %}
 
-<style>
-	input.AddTitleButton {
-			position:	fixed;
-			top:		120px;
-			right:		20px;
-			height:		50px;
-			background-color: #0011aa;
-			color:		white;
-			}
-</style>
+{% include 'Music.TitleList.div.html' %}
+<!-- end Title List -->
 
-<input type=button class=AddTitleButton value="Neuen Titel hinzufügen" onClick="AddTitle();" />
-
-<table border=0 cellpadding=5 cellspacing=0 style="font-size:9pt;">
-	<tr>
-		<th>Suchen</th>
-		<th>Komponist</th>
-		<th>Darbietender K&uuml;nstler</th>
-		<th>Album</th>
-		<th colspan=2>Titel</th>
-		<th align=left>Links</th>
-	</tr>
-{% for Title in Titles %}
-	<tr class=Hover>
-		<td>
-		<a href="http://www.myvideo.de/Videos_A-Z?searchWord={{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">
-		<img src="/Django/MediaCenter/static/MyVideo.png" border=0 height=15 /></a>
-		<a href="http://www.youtube.com/results?gl=DE&hl=de&search_query={{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">
-		<img src="/Django/MediaCenter/static/YouTube.png" border=0 height=15 /></a>
-		<input type=button style="width:40px;" value="+" onClick="AddURL('{{Title.id}}','{{Title.composer}}','{{Title.performer}}','{{Title.album}}','{{Title.title}}');" />
-		</td>
-		<td align=center> {{ Title.composer }} </td>
-		<td align=center><a class=green href="Performer?Name={{ Title.performer }}">{{ Title.performer }}</a></td>
-		<td align=center> {{ Title.album }} </td>
-		<td align=center> {{ Title.track }} </td>
-		<td align=center> {{ Title.title }} </td>
-		<td>
-		{% for URL in Title.URLs %}
-		<a href="/Django/Proxy/Play/{{ Title.performer }}%20-%20{{ Title.title }}?URL={{ URL.url|urlencode }}"><img border=0 src="/Django/MediaCenter/static/{{ URL.hoster }}.png" height=15 /></a>
-		{% endfor %}
-		</td>
-	</tr>
-{% endfor %}
-</table>
 <br/>
-
 <hr/>
-
 <br/>
 
 {% endblock %}
-</body>
-
-</html>
-

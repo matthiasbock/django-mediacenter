@@ -1,0 +1,71 @@
+<style>
+	#TitleList tr.Hover:hover	{
+					background:		#4cbafb;
+					font-color:		#234956;
+					}
+
+	#TitleList input.AddTitleButton {
+					position:		fixed;
+					top:			100px;
+					right:			20px;
+					height:			50px;
+					background-color:	#0011aa;
+					color:			white;
+					}
+	#TitleList td			{
+					max-width:		250px;
+					}
+	#TitleList a			{
+					color:			blue;
+					text-decoration: 	none;
+					}
+	#TitleList a:hover		{
+					color:			blue;
+					text-decoration: 	underline;
+					}
+	#TitleList a.Provider		{
+					text-decoration:	none;
+					padding-top:		5px;
+					padding-bottom:		0px;
+					}
+	#TitleList a.Provider:hover	{
+					background-color: 	#22ff22;
+					text-decoration: 	none;
+					}
+</style>
+
+<div id=TitleList>
+<input type=button class=AddTitleButton value="Neuen Titel hinzufügen" onClick="AddTitle();" />
+<table border=0 cellpadding=5 cellspacing=0 style="font-size:9pt;">
+	<tr>
+		<th>Suchen</th>
+		<th>Komponist</th>
+		<th>Darbietender K&uuml;nstler</th>
+		<th>Album</th>
+		<th colspan=2>Titel</th>
+		<th align=left>Links</th>
+	</tr>
+{% for Title in Titles %}
+	<tr class=Hover>
+		<td>
+		<a class=Provider href="http://www.myvideo.de/Videos_A-Z?searchWord={{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">
+		<img src="/Django/MediaCenter/static/MyVideo.png" border=0 height=15 /></a>
+		<a class=Provider href="http://www.youtube.com/results?gl=DE&hl=de&search_query={{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">
+		<img src="/Django/MediaCenter/static/YouTube.png" border=0 height=15 /></a>
+		<input type=button style="width:40px;" value="+" onClick="AddURL('{{Title.id}}','{{Title.composer}}','{{Title.performer}}','{{Title.album}}','{{Title.title}}');" />
+		</td>
+		<td align=center> {{ Title.composer }} </td>
+		<td align=center><a class=green href="Performer?Name={{ Title.performer }}">{{ Title.performer }}</a></td>
+		<td align=center> {{ Title.album }} </td>
+		<td align=center> {{ Title.track }} </td>
+		<td align=center> {{ Title.title }} </td>
+		<td>
+		{% for URL in Title.URLs %}
+		<a class=Provider href="/Django/Proxy/Play/{{ Title.performer }}%20-%20{{ Title.title }}?URL={{ URL.url|urlencode }}"><img border=0 src="/Django/MediaCenter/static/{{ URL.hoster }}.png" height=15 /></a>
+		{% endfor %}
+		</td>
+	</tr>
+{% endfor %}
+</table>
+</div>
+

@@ -5,49 +5,66 @@
 </head>
 
 <style type="text/css">
-	a.green	{
-		text-decoration: none;
-		}
-	a.green:hover {
-		background:	#22ff22;
-		color:		#ff22ff;
-		text-decoration: none;
-		}
-	tr.Hover:hover {
-		background:	#4cbafb;
-		font-color:	#234956;
-		}
-	td	{
-		border:		none;
-		max-width:	250px;
-		}
+	#Hoster		{
+			position:	absolute;
+			top:		8px;
+			right:		8px;
+			font-size:	7pt;
+			}
+	#Menu table	{
+			font-size:	11pt;
+			}
+	#Menu a		{
+			color:		blue;
+			text-decoration: none;
+			padding-left:	5px;
+			padding-right:	5px;
+			}
+	#Menu a:hover	{
+			background:	#22ff22;
+			color:		#ff22ff;
+			text-decoration: none;
+			}
+	#Menu td	{
+			border:		none;
+			}
 </style>
 
 <body bgcolor="#55bb33">
 
-<br/><br/>
+<div id=Hoster>
+	<a href="http://code.google.com/p/django-mediacenter/">http://code.google.com/p/django-mediacenter/</a>
+</div>
 
-<div align=center>
+<br/>
+
+<div id=Menu align=center>
 <table>
 	<tr>
 		<td>Musik:</td>
-		<td><a class=green href="../Music/">Titel</a>, <a class=green href="../Music/Performers">K&uuml;nstler</a>, <a class=green href="../Music/Albums">Alben</a></td>
+		<td>
+			<a href="../Music/">Titel</a>
+			<a class=green href="../Music/Performers">K&uuml;nstler</a>
+			<a href="../Music/Albums">Alben</a>
+		</td>
 	</tr>
 	<tr>
 		<td>Filme:</td>
-		<td><a class=green href="../Movies/">Titel</a></td>
+		<td>
+			<a href="../Movies/">Titel</a>
+		</td>
 	</tr>
 </table>
 </div>
+
 <hr/>
 
 <center>
-
 <h1>{% block title %}{% endblock %}</h1>
 <hr/>
 <br/>
-
 {% block main %}{% endblock %}
+</center>
 
 </body>
 
