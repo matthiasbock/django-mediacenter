@@ -4,15 +4,40 @@
 
 {% block main %}
 
-<div id=HintDiv style="border:1pt solid blue; color:black; background:yellow; position:fixed; top:0px; left:250px; right:250px; padding:4pt; visibility:hidden;">
-<input id=HintText type=text value="" style="width:500px; border:0pt; text-align:center; font-size=12pt; background:yellow;" />
+<style>
+	#Hint			{
+				border:			1pt solid blue;
+				color:			black;
+				background-color:	yellow;
+				position:		fixed;
+				top:			0px;
+				left:			250px;
+				right:			250px;
+				padding:		4pt;
+				visibility:		hidden;
+				}
+	#Hint input		{
+				border:			none;
+				width:			500px;
+				font-size:		10pt; 
+				text-align:		center;
+
+				writing-mode:		tb-rl;
+				filter:			flipH() flipV();
+
+				background-color:	yellow;
+				}
+</style>
+
+<div id=Hint>
+	<input id=HintText type=text value=""/>
 </div>
 
 <script>
 	function showHint(hint) {
 		document.getElementById('HintText').value = hint;
-		document.getElementById('HintDiv').style.visibility = "visible";
-		document.getElementById('HintDiv').style.top = event.offsetTop;
+		document.getElementById('Hint').style.visibility = "visible";
+		document.getElementById('Hint').style.top = event.offsetTop;
 		}
 </script>
 
@@ -31,7 +56,4 @@
 <br/><br/><br/>
 
 {% endblock %}
-</body>
-
-</html>
 
