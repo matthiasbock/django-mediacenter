@@ -1,7 +1,7 @@
 <html>
 
 <head>
-	<title>MediaCenter</title>
+	<title>{% block title %}MediaCenter{% endblock %}</title>
 </head>
 
 <style type="text/css">
@@ -60,10 +60,11 @@
 <hr/>
 
 <center>
-<h1>{% block title %}{% endblock %}</h1>
+<h1>{% block header %}{% endblock %}</h1>
 <hr/>
 <br/>
 {% block main %}{% endblock %}
+{% block footer %}{% endblock %}
 </center>
 
 </body>
