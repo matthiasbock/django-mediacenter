@@ -5,12 +5,14 @@ from django.shortcuts import render_to_response
 
 from Django.globals import *
 from Django.mediacenter.models import *
+from Django.mediacenter.cache import CacheProperties
 
-#import FileBase
-import httplib, os
+import httplib
 
 
-def export_title( T ):				# exportiert ein Template-übergebbares Dictionary für diesen Title-Eintrag
+# exportiert ein Template-übergebbares Dictionary für diesen Title-Eintrag
+
+def export_title( T ):
 	URLs = []
 	for URL in Urls.objects.using(MediaCenterDB).filter( title=T.id ):
 #		URLs.append( { "url":URL.url+"&use=cache", "hoster":"Local" } )
@@ -22,10 +24,13 @@ def export_title( T ):				# exportiert ein Template-übergebbares Dictionary fü
 		Track = ""
 	return { "id":T.id, "composer":T.composer, "performer":T.performer, "album":T.album, "track":Track, "title":T.title, "URLs":URLs }
 
+# end helper functions
+
 
 def TitleList( request ):
 	if request.method == "GET":
 		params = {}
+		params.update( CacheProperties() )
 		params["Titles"] = []
 		for T in Titles.objects.using(MediaCenterDB).all().order_by('album','track','composer','performer','title'):
 			params["Titles"].append( export_title(T) )
@@ -48,8 +53,9 @@ def AddURL( request ):			# POST event from AddURL div
 
 
 def PerformerList( request ):
-	cols = 6
 	params = {}
+	params.update( CacheProperties() )
+	cols = 6
 	Performer = []
 	for T in Titles.objects.using(MediaCenterDB).all().order_by( 'performer' ):
 		if not T.performer in Performer and T.performer != "":
@@ -71,6 +77,7 @@ def Performer( request ):
 	except:
 		Name = "None"
 	params = {}
+	params.update( CacheProperties() )
 	params["Performer"] = Name
 	params["Titles"] = []
 	for T in Titles.objects.using(MediaCenterDB).filter( performer=Name ).order_by( 'album','track','composer','title' ):
