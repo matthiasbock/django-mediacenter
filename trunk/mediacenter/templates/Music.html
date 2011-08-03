@@ -6,8 +6,8 @@
 
 {% block performer %}{% endblock %}
 
-{% include 'Music AddTitleDiv.html' %}
-{% include 'Music AddURLDiv.html' %}
+{% include 'Music.AddTitle.div.html' %}
+{% include 'Music.AddURL.div.html' %}
 
 <style>
 	input.AddTitleButton {
@@ -36,7 +36,7 @@
 		<td>
 		<a href="http://www.myvideo.de/Videos_A-Z?searchWord={{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">
 		<img src="/Django/MediaCenter/static/MyVideo.png" border=0 height=15 /></a>
-		<a href="http://www.youtube.com/results?search_query={{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}&gl=DE&hl=de">
+		<a href="http://www.youtube.com/results?gl=DE&hl=de&search_query={{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">
 		<img src="/Django/MediaCenter/static/YouTube.png" border=0 height=15 /></a>
 		<input type=button style="width:40px;" value="+" onClick="AddURL('{{Title.id}}','{{Title.composer}}','{{Title.performer}}','{{Title.album}}','{{Title.title}}');" />
 		</td>

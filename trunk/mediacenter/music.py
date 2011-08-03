@@ -9,6 +9,7 @@ from Django.mediacenter.models import *
 #import FileBase
 import httplib, os
 
+
 def export_title( T ):				# exportiert ein Template-übergebbares Dictionary für diesen Title-Eintrag
 	URLs = []
 	for URL in Urls.objects.using(MediaCenterDB).filter( title=T.id ):
@@ -41,60 +42,13 @@ def TitleList( request ):
 		return HttpResponseRedirect( "Performer?Name="+request.POST.get("Performer") )
 
 
-def AddOnlineMusic( request ):
-
-	if request.method == "GET":
-		params = {}
-		ID = request.GET.get("ID")
-		params["Title"] = Titles.objects.using(MediaCenterDB).get( id=ID )
-		return render_to_response("AddOnlineMusic.html", params)
-
-	elif request.method == "POST":
-		Urls.objects.using(MediaCenterDB).create( title=request.POST.get("ID"), url=request.POST.get("URL") )
-		return HttpResponseRedirect("Performer?Name="+Titles.objects.using(MediaCenterDB).get( id=request.POST.get("ID") ).performer)
-
-
-def LocalMusic( request ):
-	#...
-	return render_to_response("Search")
-
-
-def AddLocalMusic( request ):
-
-	if request.method == "GET":
-		params = {}
-#		ID = request.GET.get("ID") 			blablablabla
-#		params["Title"] = Titles.objects.using(MediaCenterDB).get( id=ID )
-		return render_to_response("AddLocal.html", params)
-
-	elif request.method == "POST":
-#		Urls.objects.using(MediaCenterDB).create( title=request.POST.get("ID"), url=request.POST.get("URL") )
-		# nur editieren, erzeugt ist es schon
-		return HttpResponseRedirect("Performer?Name="+Titles.objects.using(MediaCenterDB).get( id=request.POST.get("ID") ).performer)
-
-
-def LocalUpgrade( request ):
-	# finde alle Dateien im Verzeichnis, ist ein unbekannter Dateiname/FileSize dabei, MD5 erstellen
-	# ist die MD5 bekannt, DB korrigieren, ist die MD5 nicht bekannt -> neuer Eintrag und Edit-Link
-	params = {}
-	folder = "/home/user/Music"
-	params["new"] = []
-	for root, dirs, files in os.walk( folder ):
-		for name in files:
-			fname = os.path.join( root, name )
-			fsize = os.path.getsize( fname )
-			try:
-				Locals.objects.using(MediaCenterDB).find( filename=fname, filesize=fsize )
-			except:
-				new = Locals.objects.using(MediaCenterDB).create( filename=fname, filesize=fsize, md5=largefileMD5(fname) )
-				params["new"].append( new.id )
-	return render_to_response("NewLocals.html", params)
+def AddURL( request ):			# POST event from AddURL div
+	Urls.objects.using(MediaCenterDB).create( title=request.POST.get("ID"), url=request.POST.get("URL") )
+	return HttpResponseRedirect("Performer?Name="+Titles.objects.using(MediaCenterDB).get( id=request.POST.get("ID") ).performer)
 
 
 def PerformerList( request ):
-
 	cols = 6
-
 	params = {}
 	Performer = []
 	for T in Titles.objects.using(MediaCenterDB).all().order_by( 'performer' ):
@@ -112,20 +66,33 @@ def PerformerList( request ):
 
 
 def Performer( request ):
+	try:
+		Name = request.GET.get("Name")
+	except:
+		Name = "None"
+	params = {}
+	params["Performer"] = Name
+	params["Titles"] = []
+	for T in Titles.objects.using(MediaCenterDB).filter( performer=Name ).order_by( 'album','track','composer','title' ):
+		params["Titles"].append( export_title(T) )
+	return render_to_response("Performer.html", params)
 
-	if request.method == "GET":
+
+def PerformerIcon( request ):
+	if request.method == "GET":						# pass Performer Icon from DB
 		try:
 			Name = request.GET.get("Name")
 		except:
 			Name = "None"
-		params = {}
-		params["Performer"] = Name
-		params["Titles"] = []
-		for T in Titles.objects.using(MediaCenterDB).filter( performer=Name ).order_by( 'album','track','composer','title' ):
-			params["Titles"].append( export_title(T) )
-		return render_to_response("Performer.html", params)
+		try:
+			Icon = Performers.objects.using(MediaCenterDB).get( name=Name ).icon
+			mime = "image/jpeg"
+		except:
+			Icon = open("/var/www/Django/mediacenter/static/system-search.png", "r").read()
+			mime = "image/png"
+		return HttpResponse( Icon, mimetype=mime )
 
-	elif request.method == "POST":						# store new picture to database
+	elif request.method == "POST":						# download and store new Performer Icon in DB
 		_Performer = request.POST.get("Performer")
 		URL = request.POST.get("URL").replace("http://","")
 		host = URL.split("/")[0]
@@ -141,19 +108,4 @@ def Performer( request ):
 			pass
 		Performers.objects.using(MediaCenterDB).create( name=_Performer, icon=_Picture )
 		return HttpResponseRedirect("Performer?Name="+_Performer)
-
-
-def PerformerIcon( request ):
-	try:
-		Name = request.GET.get("Name")
-	except:
-		Name = "None"
-	try:
-		Icon = Performers.objects.using(MediaCenterDB).get( name=Name ).icon
-		mime = "image/jpeg"
-	except:
-		Icon = open("/usr/share/icons/gnome/256x256/actions/system-search.png", "r").read()
-		mime = "image/png"
-	return HttpResponse( Icon, mimetype=mime )
-
 

@@ -4,20 +4,31 @@
 
 {% block performer %}
 
-<form method="POST">
+<table>
+<tr>
+
+<td>
+<form action=PerformerIcon method=POST>
 	<img src="PerformerIcon?Name={{ Performer }}&get=picture" border=0 width=200 /><br/>
 	<br/>
 	Neues Bild hinterlegen:<br/>
 	<input type=hidden name=Performer value="{{ Performer }}" />
 	<input type=text name=URL />
-	<input type=submit value="Save" />
+	<input type=submit value=Speichern />
 </form>
+</td>
 
-<a href="http://www.google.com/search?q={{ Performer|urlencode }}&tbm=isch">{{ Performer }} bei <img border=0 src="/Google.png" height=15 /></a><br/>
+<td>
+<a href="http://www.google.com/search?tbm=isch&q={{ Performer|urlencode }}">Suche {{ Performer }} bei <img border=0 src="../static/Google.png" height=15 /> Bilder</a><br/>
 
 <br/>
 
-<a href="http://www.myvideo.de/Videos_A-Z?searchWord={{ Performer|urlencode }}">{{ Performer }} bei <img border=0 src="/MyVideo.png" height=15 /></a><br/>
+<a href="http://www.myvideo.de/Videos_A-Z?searchWord={{ Performer|urlencode }}">Suche {{ Performer }} bei <img border=0 src="../static/MyVideo.png" height=15 /></a><br/>
+<a href="http://www.youtube.com/results?gl=DE&hl=de&search_query={{ Performer|urlencode }}">Suche {{ Performer }} bei <img border=0 src="../static/YouTube.png" height=15 /></a><br/>
+</td>
+
+</tr>
+</table>
 
 <br/>
 <hr/>
