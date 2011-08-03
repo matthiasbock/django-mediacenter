@@ -12,13 +12,27 @@ CacheFolder = "/var/www/Django/proxy/cache"
 
 
 def CacheProperties():
+	try:					# Use Cache ?
+		use = (Settings.objects.using(MediaCenterDB).get(property="UseCache") == "True")
+	except:
+		use = True
+	if use:
+		use = "checked";
+
+	try:					# Cache expires after x days
+		expires = int(Settings.objects.using(MediaCenterDB).get(property="CacheExpires"))
+	except:
+		expires = 14
+
 	Cached = os.listdir(CacheFolder)
-	titles = len(Cached)
+	titles = len(Cached)			# number of files in Cache Folder
+
 	size = 0
-	for f in Cached:
+	for f in Cached:			# add up size of all files
 		size += os.path.getsize(CacheFolder+"/"+f)
-	size = size/1024/1024	# size in MB
-	return {'CachedTitles':titles, 'CachedSize':size}
+	size = size/1024/1024			# size in MB
+
+	return {'UseCache':use, 'CacheExpires':expires, 'CachedTitles':titles, 'CachedSize':size}
 
 
 def ClearCache( request ):
@@ -27,7 +41,17 @@ def ClearCache( request ):
 
 
 def SetupCache( request ):
-	Use = request.GET.__contains__("Use")
-	Expires = request.GET.get("Expires")
+
+	def setup(p, v):
+		try:
+			for PreviousSetting in Settings.objects.using(MediaCenterDB).filter(property=p):
+				PreviousSetting.delete()
+		except:
+			pass
+		Settings.objects.using(MediaCenterDB).create(property=p, value=str(v))
+
+	setup("UseCache", request.GET.__contains__("Use"))
+	setup("CacheExpires", request.GET.get("Expires"))
+
 	return HttpResponse("Cache set up.", "text/html")
 

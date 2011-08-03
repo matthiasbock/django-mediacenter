@@ -40,6 +40,13 @@ class Performers(models.Model):
     class Meta:
         db_table = u'Performers'
 
+class Settings(models.Model):
+    id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
+    property = models.CharField(max_length=90, db_column='Property') # Field name made lowercase.
+    value = models.CharField(max_length=90, db_column='Value') # Field name made lowercase.
+    class Meta:
+        db_table = u'Settings'
+
 class Streams(models.Model):
     id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
     title = models.IntegerField(db_column='Title') # Field name made lowercase.
