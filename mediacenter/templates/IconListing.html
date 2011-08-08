@@ -1,6 +1,6 @@
 {% extends "Music.html" %}
 
-{% block header %}Künstler{% endblock %}
+{% block header %}{{ Title }}{% endblock %}
 
 {% block main %}
 
@@ -46,7 +46,7 @@
 	<tr>
 	{% for col in row.cols %}
 		<td class=Hover align=center style="width:150px; height:150px; vertical-align:middle;">
-			<a href="Performer?Name={{ col }}"><img id="{{ col }}" src="PerformerIcon?Name={{ col }}" border=0 width=150 height=150 onMouseOver="showHint('{{ col }}');"/></a>
+			<a href="Details?Database={{ Prefix|urlencode }}s&Name={{ col|urlencode }}"><img id="{{ col }}" src="Icon?Database={{ Prefix|urlencode }}s&Name={{ col|urlencode }}" border=0 width=150 height=150 onMouseOver="showHint('{{ col }}');"/></a>
 		</td>
 	{% endfor %}
 	</tr>
