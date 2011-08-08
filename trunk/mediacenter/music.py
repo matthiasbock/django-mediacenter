@@ -41,7 +41,7 @@ def TitleList( request ):
 		T = Titles.objects.using(MediaCenterDB).get( composer=request.POST.get("Composer"), performer=request.POST.get("Performer"), album=request.POST.get("Album"), title=request.POST.get("Title") )
 		if request.POST.get("URL") != "":
 			Urls.objects.using(MediaCenterDB).create( title=T.id, url=request.POST.get("URL") )
-		return HttpResponseRedirect("Details?Database?Performers&Name="+request.POST.get("Performer"))
+		return HttpResponseRedirect("Details?Database=Performers&Name="+request.POST.get("Performer"))
 
 
 def AddURL( request ):			# POST event from AddURL div
