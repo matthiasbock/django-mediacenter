@@ -1,0 +1,58 @@
+{% extends "Music.html" %}
+
+{% block title %}{{ Name }}{% endblock %}
+
+{% block header %}{{ Name }}{% endblock %}
+
+{% block Details %}
+
+<style>
+	#{{ Prefix }}		{
+				font-size:		10pt;
+				}
+	#{{ Prefix }} a		{
+				text-decoration:	none;
+				}
+	#{{ Prefix }} a:hover	{
+				text-decoration:	underline;
+				}
+</style>
+
+<table id={{ Prefix }}>
+<tr>
+
+<td>
+	<form action=Icon method=POST>
+		<img src="Icon?Database={{ Prefix|urlencode }}s&Name={{ Name|urlencode }}&get=picture" border=0 width=200 /><br/>
+		<br/>
+		Neues Bild hinterlegen:<br/>
+		<input type=hidden name=Database value="{{ Prefix }}s" />
+		<input type=hidden name=Name value="{{ Name }}" />
+		URL: <input type=text name=URL />
+		<input type=submit value=Speichern />
+	</form>
+</td>
+
+<td>
+	<ul>
+		<li>
+			<a target="_blank" href="http://www.google.com/search?tbm=isch&q={{ Name|urlencode }}">Suche {{ Name }} bei <img border=0 src="../static/Google.png" height=15 /> Bilder</a><br/>
+		</li>
+		<br/>
+		<li>
+			<a target="_blank" href="http://www.myvideo.de/Videos_A-Z?searchWord={{ Name|urlencode }}">Suche {{ Name }} bei <img border=0 src="../static/MyVideo.png" height=15 /></a><br/>
+		</li>
+		<li>
+			<a target="_blank" href="http://www.youtube.com/results?gl=DE&hl=de&search_query={{ Name|urlencode }}">Suche {{ Name }} bei <img border=0 src="../static/YouTube.png" height=15 /></a><br/>
+		</li>
+	</ul>
+</td>
+
+</tr>
+</table>
+
+<br/>
+<hr/>
+<br/>
+
+{% endblock %}

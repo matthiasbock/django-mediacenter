@@ -16,6 +16,13 @@ class Albums(models.Model):
     class Meta:
         db_table = u'Albums'
 
+class Composers(models.Model):
+    id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
+    name = models.CharField(max_length=300, db_column='Name') # Field name made lowercase.
+    icon = models.TextField(db_column='Icon', blank=True) # Field name made lowercase.
+    class Meta:
+        db_table = u'Composers'
+
 class Locals(models.Model):
     id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
     title = models.IntegerField(null=True, db_column='Title', blank=True) # Field name made lowercase.
