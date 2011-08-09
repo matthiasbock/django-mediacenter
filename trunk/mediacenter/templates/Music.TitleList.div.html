@@ -55,12 +55,12 @@
 	{% for Title in Titles %}
 		<tr class=Hover>
 			<td>
-			<a class=Provider target="_blank" href="http://www.myvideo.de/Videos_A-Z?searchWord={{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">
-			<img src="/Django/MediaCenter/static/MyVideo.png" /></a>
-			<a class=Provider target="_blank" href="http://www.youtube.com/results?gl=DE&hl=de&search_query={{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">
-			<img src="/Django/MediaCenter/static/YouTube.png" /></a>
+			<a class=Provider target="_blank" href="http://www.myvideo.de/Videos_A-Z?searchChannelID=15&searchChannel=Musik&searchOrder=0&searchWord={{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">		<img src="/Django/MediaCenter/static/MyVideo.png" />		</a>
+			<a class=Provider target="_blank" href="http://www.youtube.com/results?gl=DE&hl=de&search_query={{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">	<img src="/Django/MediaCenter/static/YouTube.png" />		</a>
+			<a class=Provider target="_blank" href="http://www.dailymotion.com/relevance/search/{{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">		<img src="/Django/MediaCenter/static/dailymotion.png" />	</a>
 			<input type=button style="width:40px;" value="+" onClick="AddURL('{{Title.id}}','{{Title.composer}}','{{Title.performer}}','{{Title.album}}','{{Title.title}}');" />
 			</td>
+
 			<td align=center><a class=green href="Details?Database=Composers&Name={{ Title.composer|urlencode }}">{{ Title.composer }}</a></td>
 			<td align=center><a class=green href="Details?Database=Performers&Name={{ Title.performer|urlencode }}">{{ Title.performer }}</a></td>
 			<td align=center><a class=green href="Details?Database=Albums&Name={{ Title.album|urlencode }}">{{ Title.album }}</a></td>
