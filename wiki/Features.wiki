@@ -1,0 +1,6 @@
+#summary MediaCenter Features
+
+= Features =
+
+ * include music from music/video hosters like Youtube, Myvideo and others
+ * Grooveshark search and embedded playback
