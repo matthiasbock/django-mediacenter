@@ -2,4 +2,4 @@
 
 = Planned Features =
 
-* embed grooveshark player
+ * embed grooveshark player
