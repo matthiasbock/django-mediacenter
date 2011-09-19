@@ -1,10 +1,8 @@
-# Django settings for django_calendar project.
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Matthias Bock', 'matthias.bock@hu-berlin.de'),
+    ('webmaster', 'webmaster@localhost'),
 )
 
 MANAGERS = ADMINS
@@ -12,18 +10,18 @@ MANAGERS = ADMINS
 from Django.globals import *
 
 DATABASES = {
-   MediaCenterDB: {
+   'django-mediacenter': {
         'ENGINE':	'django.db.backends.mysql',
-        'NAME':		MediaCenterDB,
+        'NAME':		'django-mediacenter',
         'USER': 	'Django',
-        'PASSWORD':	'your Django password',
+        'PASSWORD':	'',
         'HOST':		'',
         'PORT':		'',
 	}
 }
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '2*n=_g9_(1x@%+d$p(+0cr_naa_v8@yt%@j6+-^%cdcowk^e%0'
+SECRET_KEY = ''
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
