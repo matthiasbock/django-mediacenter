@@ -10,15 +10,15 @@ MANAGERS = ADMINS
 from Django.globals import *
 
 DATABASES = {
-   'django-mediacenter': {
-        'ENGINE':	'django.db.backends.mysql',
-        'NAME':		'django-mediacenter',
-        'USER': 	'Django',
-        'PASSWORD':	'',
-        'HOST':		'',
-        'PORT':		'',
+	'django-mediacenter': {
+		'ENGINE':	'django.db.backends.mysql',
+		'NAME':		'django-mediacenter',
+		'USER': 	'Django',
+		'PASSWORD':	'',
+		'HOST':		'',
+		'PORT':		'',
+		}
 	}
-}
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ''
