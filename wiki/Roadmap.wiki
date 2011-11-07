@@ -3,3 +3,4 @@
 = Roadmap =
 
  * Grooveshark search and embedded playback
+ * resolve real video URLs and embed HTML5 video-Elements
