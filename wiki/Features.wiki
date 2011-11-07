@@ -1,5 +1,9 @@
 #summary MediaCenter Features
 
-= Features =
+= Targeted media hosters =
 
- * include music from music/video hosters like Youtube, Myvideo and others
+ * Youtube
+ * Myvideo
+ * Dailymotion
+ * Wikimedia Commons
+ * Grooveshark
