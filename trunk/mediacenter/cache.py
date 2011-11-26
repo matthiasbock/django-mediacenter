@@ -3,12 +3,12 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 
-from Django.globals import *
 from Django.mediacenter.models import *
 
 import httplib, os
 
-CacheFolder = "/var/www/Django/proxy/cache"
+MediaCenterDB = 'django-mediacenter'
+CacheFolder = "/var/www/Django/mediacenter/cache"
 
 
 def CacheProperties():

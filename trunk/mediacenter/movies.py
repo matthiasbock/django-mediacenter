@@ -3,8 +3,9 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 
-from Django.globals import *
 from Django.MediaCenter.models import *
+
+MediaCenterDB = 'django-mediacenter'
 
 # http://imdbpy.sourceforge.net/?page=docs
 import httplib, os, imdb
