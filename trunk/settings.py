@@ -7,7 +7,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
+DATABASE = {
 	'django-mediacenter': {
 		'ENGINE':	'django.db.backends.mysql',
 		'NAME':		'django-mediacenter',
@@ -17,11 +17,11 @@ DATABASES = {
 		'PORT':		'',
 		}
 	}
-DATABASES['default'] = DATABASES['django-mediacenter']
+DATABASES = { 'default': DATABASE['django-mediacenter'] }
 
 SECRET_KEY = ''
 
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Europe/Berlin'
 LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
@@ -52,7 +52,10 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'Django.urls'
 
 TEMPLATE_DIRS = (
-	"/var/www/Django/mediacenter/templates",
+	"/var/www/Django/mediacenter/",
+	"/var/www/Django/mediacenter/Music/",
+	"/var/www/Django/mediacenter/Movies/",
+	"/var/www/Django/mediacenter/Radio/",
 )
 
 INSTALLED_APPS = (

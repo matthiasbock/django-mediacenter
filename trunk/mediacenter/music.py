@@ -4,13 +4,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 
 from Django.mediacenter.models import *
-from Django.mediacenter.cache import CacheProperties
-
-import httplib
 
 MediaCenterDB = 'django-mediacenter'
 
-def forward(request):
+def index(request):
 	return HttpResponseRedirect('Music/')
 
 def export_title( T ):			# exportiert ein Template-übergebbares Dictionary für diesen Title-Eintrag
