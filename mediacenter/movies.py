@@ -3,7 +3,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 
-from Django.MediaCenter.models import *
+from Django.mediacenter.models import *
 
 MediaCenterDB = 'django-mediacenter'
 

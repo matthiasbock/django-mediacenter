@@ -56,6 +56,7 @@ TEMPLATE_DIRS = (
 	"/var/www/Django/mediacenter/Music/",
 	"/var/www/Django/mediacenter/Movies/",
 	"/var/www/Django/mediacenter/Radio/",
+	"/var/www/Django/mediacenter/Player/",
 )
 
 INSTALLED_APPS = (
