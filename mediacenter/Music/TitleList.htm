@@ -57,13 +57,10 @@
 		<tr class=Hover>
 			<td>
 			{% for URL in Title.URLs %}
-			<a href="javascript:play('test');"><img src="/Django/MediaCenter/static/play.png"/></a>
-			<a href="javascript:add2playlist('test');"><img src="/Django/MediaCenter/static/plus.png"/></a>
-<!--			<a class=Provider target="_blank" href="{{ Title.performer }}%20-%20{{ Title.title }}.flv?URL={{ URL.url|urlencode }}"></a>
-
-			<a class=Provider target="_blank" href="{{ URL.url }}"><img src="/Django/MediaCenter/static/{{ URL.hoster }}.png"/></a>
+			<a href="javascript:play('{{ URL.url }}');"><img src="/Django/MediaCenter/static/play.png"/></a>
 			{% endfor %}
-			Suchen:
+
+<!--			Suchen:
 			<a class=Provider target="_blank" href="http://www.myvideo.de/Videos_A-Z?searchChannelID=15&searchChannel=Musik&searchOrder=0&searchWord={{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">		<img src="/Django/MediaCenter/static/MyVideo.png" />		</a>
 			<a class=Provider target="_blank" href="http://www.youtube.com/results?gl=DE&hl=de&search_query={{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">	<img src="/Django/MediaCenter/static/YouTube.png" />		</a>
 			<a class=Provider target="_blank" href="http://www.dailymotion.com/relevance/search/{{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">		<img src="/Django/MediaCenter/static/dailymotion.png" />	</a>
