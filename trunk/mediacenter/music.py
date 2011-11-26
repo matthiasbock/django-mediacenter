@@ -26,7 +26,6 @@ def export_title( T ):			# exportiert ein Template-übergebbares Dictionary für
 def TitleList( request ):
 	if request.method == "GET":						# return a list of all titles
 		params = {}
-		params.update( CacheProperties() )
 		params["Titles"] = []
 		for T in Titles.objects.using(MediaCenterDB).all().order_by('album','track','composer','performer','title'):
 			params["Titles"].append( export_title(T) )
@@ -51,7 +50,6 @@ def AddURL( request ):			# POST event from AddURL div
 
 def IconListing( request ):
 	params = {}
-	params.update( CacheProperties() )
 
 	Database = request.GET.get("Database")
 	params['Prefix'] = Database[:-1]		# Composer, Performer, Album
@@ -91,7 +89,6 @@ def IconListing( request ):
 
 def Details( request ):
 	params = {}
-	params.update( CacheProperties() )
 
 	Database = request.GET.get("Database")
 	Name = request.GET.get("Name")
