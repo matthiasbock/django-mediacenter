@@ -8,7 +8,7 @@ from Django.mediacenter.models import *
 MediaCenterDB = 'django-mediacenter'
 
 def index(request):
-	return HttpResponseRedirect('Music/')
+	return render_to_response('MediaCenter.html')
 
 def export_title( T ):			# exportiert ein Template-übergebbares Dictionary für diesen Title-Eintrag
 	URLs = []
