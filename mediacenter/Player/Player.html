@@ -2,9 +2,11 @@
 
 <body>
 
-	<img src="../static/play.png">
-	<video name=Player id=Player src="{{ URL }}"></video>
-
+	<script src='../static/Player.js'></script>
+	<label id=Link></label>
+	<img src="../static/stop.png" onClick="stop();">
+	<!--<video name=Player id=Player src="http://video-js.zencoder.com/oceans-clip.ogv" autobuffer autoplay controls/>-->
+	<div id=Player></div>
 </body>
 
 </html>

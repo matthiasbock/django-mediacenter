@@ -47,24 +47,18 @@
 
 	<table border=0 cellpadding=5 cellspacing=0>
 		<tr>
+			<th align=left></th>
 			<th>Komponist</th>
 			<th>Darbietender K&uuml;nstler</th>
 			<th>Album</th>
 			<th colspan=2>Titel</th>
-			<th align=left></th>
 		</tr>
 	{% for Title in Titles %}
 		<tr class=Hover>
-			<td align=center><a class=green href="Details?Database=Composers&Name={{ Title.composer|urlencode }}">{{ Title.composer }}</a></td>
-			<td align=center><a class=green href="Details?Database=Performers&Name={{ Title.performer|urlencode }}">{{ Title.performer }}</a></td>
-			<td align=center><a class=green href="Details?Database=Albums&Name={{ Title.album|urlencode }}">{{ Title.album }}</a></td>
-			<td align=center> {{ Title.track }} </td>
-			<td align=center> {{ Title.title }} </td>
-
 			<td>
 			{% for URL in Title.URLs %}
-			<a href="javascript:play(..."><img src="/Django/MediaCenter/static/play.png"/></a>
-		...
+			<a href="javascript:play('test');"><img src="/Django/MediaCenter/static/play.png"/></a>
+			<a href="javascript:add2playlist('test');"><img src="/Django/MediaCenter/static/plus.png"/></a>
 <!--			<a class=Provider target="_blank" href="{{ Title.performer }}%20-%20{{ Title.title }}.flv?URL={{ URL.url|urlencode }}"></a>
 
 			<a class=Provider target="_blank" href="{{ URL.url }}"><img src="/Django/MediaCenter/static/{{ URL.hoster }}.png"/></a>
@@ -75,6 +69,12 @@
 			<a class=Provider target="_blank" href="http://www.dailymotion.com/relevance/search/{{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">		<img src="/Django/MediaCenter/static/dailymotion.png" />	</a>
 			<input type=button style="width:40px;" value="+" onClick="AddURL('{{Title.id}}','{{Title.composer}}','{{Title.performer}}','{{Title.album}}','{{Title.title}}');" />-->
 			</td>
+
+			<td align=center><a class=green href="Details?Database=Composers&Name={{ Title.composer|urlencode }}">{{ Title.composer }}</a></td>
+			<td align=center><a class=green href="Details?Database=Performers&Name={{ Title.performer|urlencode }}">{{ Title.performer }}</a></td>
+			<td align=center><a class=green href="Details?Database=Albums&Name={{ Title.album|urlencode }}">{{ Title.album }}</a></td>
+			<td align=center> {{ Title.track }} </td>
+			<td align=center> {{ Title.title }} </td>
 		</tr>
 	{% endfor %}
 	</table>
