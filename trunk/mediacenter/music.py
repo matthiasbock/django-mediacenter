@@ -62,7 +62,7 @@ def IconListing( request ):
 	elif Database == "Albums":
 		params['Title'] = 'Alben'
 
-	cols = 6
+	cols = 5
 	results = []
 	for T in Titles.objects.using(MediaCenterDB).all().order_by(orderby):
 		if Database == "Composers":
