@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
-	(r'^MediaCenter/$',				"Django.mediacenter.music.forward"),
+	(r'^MediaCenter/$',				"Django.mediacenter.music.index"),
 
 	(r'^MediaCenter/Music/$',			"Django.mediacenter.music.TitleList"),
 	(r'^MediaCenter/Music/AddURL$',			"Django.mediacenter.music.AddURL"),
