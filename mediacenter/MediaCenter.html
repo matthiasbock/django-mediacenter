@@ -2,75 +2,100 @@
 
 <head>
 	<title>{% block title %}MediaCenter{% endblock %}</title>
+	<style>
+		body		{
+				background-color:	white;
+				margin:			0px;
+				padding:		0px;
+				overflow:		hidden;
+				}
+	</style>
 </head>
 
-<style type="text/css">
-	#Hoster		{
-			position:	absolute;
-			top:		8px;
-			right:		8px;
-			font-size:	7pt;
+<body>
+<style>
+	#Menu		{
+			border:			none;
+			background-color:	#55bb33;
+			position:		absolute;
+			left:			0px;
+			top:			0px;
+			width:			100%;
+			height:			10%;
+			overflow:		hidden;
+			}
+	#Menu label	{
+			position:		absolute;
+			top:			8px;
+			right:			8px;
+			font-size:		7pt;
 			}
 	#Menu table	{
-			font-size:	11pt;
+			font-size:		11pt;
 			}
 	#Menu a		{
-			color:		blue;
-			text-decoration: none;
-			padding-left:	5px;
-			padding-right:	5px;
+			color:			blue;
+			text-decoration: 	none;
+			padding-left:		5px;
+			padding-right:		5px;
 			}
 	#Menu a:hover	{
-			background:	#22ff22;
-			color:		#ff22ff;
-			text-decoration: none;
+			background:		#22ff22;
+			color:			#ff22ff;
+			text-decoration: 	none;
 			}
 	#Menu td	{
-			border:		none;
+			border:			none;
 			}
 </style>
-
-<body bgcolor="#55bb33">
-
-<div id=Hoster>
-	<a target="_blank" href="http://code.google.com/p/django-mediacenter/">http://code.google.com/p/django-mediacenter/</a>
-</div>
-
-<br/>
-
 <div id=Menu align=center>
-<table>
-	<tr>
-		<td>Musik:</td>
-		<td>
-			<a href="../Music/">Titel</a>
-			<a href="../Music/IconListing?Database=Composers">Komponisten</a>
-			<a href="../Music/IconListing?Database=Performers">K&uuml;nstler</a>
-			<a href="../Music/IconListing?Database=Albums">Alben</a>
-		</td>
-	</tr>
-	<tr>
-		<td>Filme:</td>
-		<td>
-			<a href="../Movies/">Titel</a>
-		</td>
-	</tr>
-</table>
+	<label id=Hoster><a target="_blank" href="http://django-mediacenter.googlecode.com/">http://django-mediacenter.googlecode.com/</a></label>
+	<table>
+		<tr>
+			<td>Musik:</td>
+			<td>
+				<a target=Main href="../Music/">Titel</a>
+				<a target=Main href="../Music/IconListing?Database=Composers">Komponisten</a>
+				<a target=Main href="../Music/IconListing?Database=Performers">K&uuml;nstler</a>
+				<a target=Main href="../Music/IconListing?Database=Albums">Alben</a>
+			</td>
+		</tr>
+		<tr>
+			<td>Filme:</td>
+			<td>
+				<a target=Main href="../Movies/">Titel</a>
+			</td>
+		</tr>
+	</table>
 </div>
 
-<hr/>
-
-<center>
-<h1>{% block header %}{% endblock %}</h1>
-<hr/>
-<br/>
-{% block main %}{% endblock %}
-<br/>
-<hr/>
-<br/>
-{% block footer %}{% endblock %}
-</center>
-
+<style>
+	iframe		{
+			border:			none;
+			position:		absolute;
+			}
+	#Playlist	{
+			left:			0px;
+			top:			10%;
+			width:			25%;
+			height:			56%;
+			}	
+	#Player		{
+			left:			0px;
+			top:			66%;
+			width:			25%;
+			height:			33%;
+			}
+	#Main		{
+			left:			25%;
+			top:			10%;
+			width:			75%;
+			height:			90%;
+			}
+</style>
+<iframe name=Playlist id=Playlist src=Playlist></iframe>
+<iframe name=Player id=Player src=Player></iframe>
+<iframe name=Main id=Main src=Titles></iframe>
 </body>
 
 </html>
