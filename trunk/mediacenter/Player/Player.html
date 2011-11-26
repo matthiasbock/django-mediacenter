@@ -1,10 +1,33 @@
 <html>
 
-<body>
+<style>
+	body		{
+			margin:		0px;
+			padding:	0px;
+			overflow:	hidden;
+			}
+	div		{
+			margin:		0px;
+			padding:	0px;
+			position:	absolute;
+			left:		0px;
+			bottom:		0px;
+			width:		100%;
+			height:		auto;
+			}
+</style>
 
+<body>
 	<script src='../static/Player.js'></script>
+	<script>
+		function embedLoaded() {
+			e = document.getElementById('embed');
+			e.style.width = "100%";
+			e.style.height = e.offsetWidth+20;
+			document.getElementById('Link').text = e.src;
+			}
+	</script>
 	<label id=Link></label>
-	<img src="../static/stop.png" onClick="stop();">
 	<!--<video name=Player id=Player src="http://video-js.zencoder.com/oceans-clip.ogv" autobuffer autoplay controls/>-->
 	<div id=Player></div>
 </body>
