@@ -11,5 +11,11 @@ function resolve(URL) {
 	}
 
 function play(URL) {
-	
+	link = resolve(URL);
+	alert(link);
+	document.getElementById('Player').innerHTML = '<embed src="'+link+'"><\/embed>';
+	}
+
+function stop() {
+	document.getElementById('Player').innerHTML = '';
 	}
