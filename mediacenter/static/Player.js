@@ -12,6 +12,7 @@ function resolve(URL) {
 
 function play(URL) {
 	link = resolve(URL);
+//	window.open(link);
 	parent.Player.document.getElementById('Player').innerHTML = '<embed id=embed src="'+link+'" onload="embedLoaded();" type="application/x-mplayer2"><\/embed><small>'+link;
 	}
 

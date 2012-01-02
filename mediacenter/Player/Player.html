@@ -30,6 +30,23 @@
 	<label id=Link></label>
 	<!--<video name=Player id=Player src="http://video-js.zencoder.com/oceans-clip.ogv" autobuffer autoplay controls/>-->
 	<div id=Player></div>
+
+
+<object id="MediaPlayer" height="220" width="220" type="application/x-oleobject" standby="Loading Player ...">
+	<param value="http://starfm.de/streams/bln_m.pls" name="URL"/>
+	<param value="true" name="TransparentAtStart"/>
+	<param value="false" name="AudioStream"/>
+	<param value="true" name="AutoStart"/>
+	<param value="false" name="AnimationatStart"/>
+	<param value="true" name="ShowStatusBar"/>
+	<param value="true" name="ShowControls"/>
+	<param value="false" name="autoSize"/>
+	<param value="false" name="displaySize"/>
+	<param value="true" name="ShowAudioControls"/>
+	<param value="false" name="ShowPositionControls"/>
+	<embed name="MediaPlayer" type="application/x-mplayer2" src="http://starfm.de/streams/bln_m.asx" pluginspage="http://mplayerplug-in.sourceforge.net/" width="220" height="220" displaysize="0" showstatusbar="1" autosize="0" showpositioncontrols="0" showaudiocontrols="1" showcontrols="true" animationatstart="0" autostart="1" transparentatstart="1" />
+</object>
+
 </body>
 
 </html>
