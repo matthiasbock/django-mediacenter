@@ -12,11 +12,9 @@ def index(request):
 
 def export_title( T ):			# exportiert ein Template-übergebbares Dictionary für diesen Title-Eintrag
 	URLs = []
-	for URL in Urls.objects.using(MediaCenterDB).filter( title=T.id ):
-#		URLs.append( { "url":URL.url+"&use=cache", "hoster":"Local" } )
-		URLs.append( { "url":URL.url, "hoster":URL.url.replace("http://","").replace(".","/").split("/")[1] } )
-	for local in Locals.objects.using(MediaCenterDB).filter( title=T.id ):
-		URLs.append( { "url":FileBase.File( ID=local.filebaseid ).FullPath(), "hoster":"FileBase" } )
+	for URL in Online.objects.using(MediaCenterDB).filter( title=T.id ):
+#		URLs.append( { "url":URL.link+"&use=cache", "hoster":"Local" } )
+		URLs.append( { "url":URL.link, "hoster":URL.link.replace("http://","").replace(".","/").split("/")[1] } )
 	Track = T.track
 	if Track == 0:
 		Track = ""

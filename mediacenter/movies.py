@@ -9,7 +9,6 @@ MediaCenterDB = 'django-mediacenter'
 
 # http://imdbpy.sourceforge.net/?page=docs
 import httplib, os, imdb
-from Django.google import GooglePictures
 from operator import itemgetter
 
 

@@ -12,11 +12,15 @@ urlpatterns = patterns('',
 	(r'^MediaCenter/Music/Playlist$',		"Django.mediacenter.player.Playlist"),
 	(r'^MediaCenter/Music/Player$',			"Django.mediacenter.player.Player"),
 
+	(r'^MediaCenter/Radio/$',			"Django.mediacenter.radio.Listing"),
+	(r'^MediaCenter/Radio/Logo$',			"Django.mediacenter.radio.Logo"),
+
 	(r'^MediaCenter/Movies/$',			"Django.mediacenter.movies.Listing"),
 	(r'^MediaCenter/Movies/Icon$',			"Django.mediacenter.movies.Icon"),
 	(r'^MediaCenter/Movies/Search$',		"Django.mediacenter.movies.Search"),
 	(r'^MediaCenter/Movies/AddMovie$',		"Django.mediacenter.movies.AddMovie"),
 	(r'^MediaCenter/Movies/AddStream$',		"Django.mediacenter.movies.AddStream"),
+
 	(r'^MediaCenter/static/(?P<path>.*)$',		'django.views.static.serve', {'document_root': '/var/www/Django/mediacenter/static', 'show_indexes': True}),
 )
 
