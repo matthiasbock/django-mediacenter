@@ -1,7 +1,5 @@
 {% extends "MusicTemplate.html" %}
 
-{% block header %}Musikliste</h1><br/>[ als CSV herunterladen ]<h1>{% endblock %}
-
 {% block main %}
 	{% block Details %}{% endblock %}
 	<!-- Title List -->
@@ -12,73 +10,6 @@
 {% endblock %}
 
 {% block footer %}
-	<style>
-		#Footer			{
-					font-size:		10pt;
-					text-align:		right;
-					width:			100%;
-					}
-		#Footer #Expire		{
-					width:			30px;
-					}
-		#Footer #Save		{
-					opacity:		.4;
-					}
-		#Footer #Save:hover	{
-					opacity:		1;
-					}
-		iframe.DoInBackground	{
-					position:		fixed;
-	/*				visibility:		hidden;*/
-					}
-	</style>
-	<script>
-		function ClearCache() {
-			if ( confirm("Really delete all titles in the cache and free {{ CachedSize }} MB of memory ?") ) {
-				document.getElementById('CacheIFrame').src = "ClearCache";
-				}
-			}
-
-		function CacheCleared() {
-			document.getElementById("CachedTitles").innerHTML = "0";
-			document.getElementById("CachedSize").innerHTML = "0";
-			}
-
-		function CachePropertyChanged() {
-			document.getElementById('Save').style.opacity = '1';
-			}
-
-		function SetupCache() {
-			use = false;
-			if ( document.getElementyById('Use').checked ) {
-				use = true;
-				}
-			document.getElementById('CacheIFrame').src = "SetupCache?Use="+use+"&Expires="+document.getElementyById('Expires').value;
-			}
-
-		function CacheSetUp() {
-			document.getElementById('Save').style.opacity = '.4';
-			}
-
-		function CacheIFrameLoaded(iframe) {
-			if ( iframe.src.indexOf("ClearCache") > -1 ) {
-				CacheCleared();
-				}
-			if ( iframe.src.indexOf("SetupCache") > -1 ) {
-				CacheSetUp();
-				}
-			}
-	</script>
-	<div id=Footer>
-		<input type=checkbox id=Use onClick="CachePropertyChanged();" {{ UseCache }} /> Use cache. 
-
-		Clear cache after <input type=text id=Expire value="{{ CacheExpires }}" onKeyDown="CachePropertyChanged();" /> days. 
-		<input type=button value=Save id=Save onClick="SetupCache();"/>
-
-		<label id=CachedTitles>{{ CachedTitles }}</label> titles in cache (<label id=CachedSize>{{ CachedSize }}</label> MB). 
-		<input type=button value="Clear cache" onClick="ClearCache();"/>
-
-		<iframe class=DoInBackground id=CacheIFrame src="about:blank" onLoad="CacheIFrameLoaded(this);"></iframe>
-	</div>
+	<a href="#">[ Liste als M3U herunterladen ]</a>
 {% endblock %}
 

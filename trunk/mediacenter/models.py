@@ -23,13 +23,6 @@ class Composers(models.Model):
     class Meta:
         db_table = u'Composers'
 
-class Locals(models.Model):
-    id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
-    title = models.IntegerField(null=True, db_column='Title', blank=True) # Field name made lowercase.
-    filebaseid = models.IntegerField(db_column='FileBaseID') # Field name made lowercase.
-    class Meta:
-        db_table = u'Locals'
-
 class Movies(models.Model):
     id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
     original = models.CharField(max_length=300, db_column='Original') # Field name made lowercase.
@@ -40,6 +33,13 @@ class Movies(models.Model):
     class Meta:
         db_table = u'Movies'
 
+class Online(models.Model):
+    id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
+    title = models.IntegerField(null=True, db_column='Title', blank=True) # Field name made lowercase.
+    link = models.CharField(max_length=900, db_column='Link') # Field name made lowercase.
+    class Meta:
+        db_table = u'Online'
+
 class Performers(models.Model):
     id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
     name = models.CharField(max_length=300, db_column='Name') # Field name made lowercase.
@@ -47,19 +47,16 @@ class Performers(models.Model):
     class Meta:
         db_table = u'Performers'
 
-class Settings(models.Model):
+class Radio(models.Model):
     id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
-    property = models.CharField(max_length=90, db_column='Property') # Field name made lowercase.
-    value = models.CharField(max_length=90, db_column='Value') # Field name made lowercase.
+    name = models.CharField(max_length=90, db_column='Name') # Field name made lowercase.
+    logo = models.TextField(db_column='Logo', blank=True) # Field name made lowercase.
+    frequency = models.DecimalField(decimal_places=1, null=True, max_digits=5, db_column='Frequency', blank=True) # Field name made lowercase.
+    stream = models.CharField(max_length=900, db_column='Stream', blank=True) # Field name made lowercase.
+    playlist = models.CharField(max_length=900, db_column='Playlist', blank=True) # Field name made lowercase.
+    homepage = models.CharField(max_length=900, db_column='Homepage', blank=True) # Field name made lowercase.
     class Meta:
-        db_table = u'Settings'
-
-class Streams(models.Model):
-    id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
-    title = models.IntegerField(db_column='Title') # Field name made lowercase.
-    url = models.CharField(max_length=600, db_column='URL') # Field name made lowercase.
-    class Meta:
-        db_table = u'Streams'
+        db_table = u'Radio'
 
 class Titles(models.Model):
     id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
@@ -70,14 +67,4 @@ class Titles(models.Model):
     title = models.CharField(max_length=300, db_column='Title') # Field name made lowercase.
     class Meta:
         db_table = u'Titles'
-
-class Urls(models.Model):
-    id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
-    title = models.IntegerField(null=True, db_column='Title', blank=True) # Field name made lowercase.
-    url = models.CharField(max_length=900, db_column='URL') # Field name made lowercase.
-    offset = models.DecimalField(decimal_places=3, null=True, max_digits=5, db_column='Offset', blank=True) # Field name made lowercase.
-    duration = models.DecimalField(decimal_places=3, null=True, max_digits=5, db_column='Duration', blank=True) # Field name made lowercase.
-    complete = models.IntegerField(null=True, db_column='Complete', blank=True) # Field name made lowercase.
-    class Meta:
-        db_table = u'URLs'
 
