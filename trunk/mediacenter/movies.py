@@ -13,7 +13,7 @@ from operator import itemgetter
 
 
 def Listing( request ):
-	cols = 5
+	cols = 4
 	params = {}
 	params["rows"] = []
 	col = cols

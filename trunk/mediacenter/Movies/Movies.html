@@ -1,43 +1,57 @@
-{% extends "MediaCenter.html" %}
+<html>
 
-{% block title %}Filme{% endblock %}
-
-{% block main %}
-
-<form name=search action=Search method=GET>
-Suchen: 
-<input name=query type=text />
-<input type=submit value=">>"/>
-</form>
+<body>
+	<form name=search action=Search method=GET>
+		Suchen: 
+		<input name=query type=text />
+		<input type=submit value=">>"/>
+	</form>
 
 <hr/>
 
-<div id=HintDiv style="border:1pt solid blue; color:black; background:yellow; position:fixed; top:0px; left:250px; right:250px; padding:4pt; visibility:hidden;">
-<input id=HintText type=text value="" style="width:500px; border:0pt; text-align:center; font-size=12pt; background:yellow;" />
-</div>
+	<style>
+		#HintDiv		{
+					border:1pt solid blue;
+					color:black;
+					background:yellow;
+					position:fixed;
+					top:0px;
+					right:250px; 
+					width:400px;
+					padding:4pt;
+					visibility:hidden;
+					}
+		#HintDiv #HintText	{
+					width:390px;
+					border:0pt;
+					text-align:center;
+					font-size=12pt;
+					background:yellow;
+					}
+	</style>
 
-<script>
-	function showHint( original, german, year ) {
-		document.getElementById("HintText").value = original+' / '+german;
-		document.getElementById("HintDiv").style.visibility = 'visible';
-		}
-</script>
+	<div id=HintDiv>
+		<input id=HintText type=text value="" />
+	</div>
 
-<table border=0 cellpadding=15 cellspacing=3 style="font-size:8pt;border:1px solid #000;">
-{% for row in rows %}
-	<tr>
-	{% for col in row %}
-		<td class=Hover align=center style="width:150px; height:150px; vertical-align:middle;">
-			<img src="Icon?ID={{ col.id }}" border=0 height=270 onMouseOver="showHint('{{ col.original }}','{{ col.german }}','{{ col.year }}');"/>
-		</td>
+	<script>
+		function showHint( original, german, year ) {
+			document.getElementById("HintText").value = original+' / '+german;
+			document.getElementById("HintDiv").style.visibility = 'visible';
+			}
+	</script>
+
+	<table border=0 cellpadding=15 cellspacing=3 style="font-size:8pt;border:1px solid #000;">
+	{% for row in rows %}
+		<tr>
+		{% for col in row %}
+			<td class=Hover align=center style="width:150px; height:150px; vertical-align:middle;">
+				<img src="Icon?ID={{ col.id }}" border=0 height=270 onMouseOver="showHint('{{ col.original }}','{{ col.german }}','{{ col.year }}');"/>
+			</td>
+		{% endfor %}
+		</tr>
 	{% endfor %}
-	</tr>
-{% endfor %}
-</table>
-
-<br/><br/><br/>
-
-{% endblock %}
+	</table>
 </body>
 
 </html>
