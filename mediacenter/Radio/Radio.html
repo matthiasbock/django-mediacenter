@@ -1,28 +1,33 @@
 <html>
 
-<body>
-	<style>
-		div.Station		{
-					border:			1px solid black;
-					width:			100%;
-					}
-		div.Station:Hover	{
-					background-color:	#84a9d7;
-					}
-		div.Station a		{
-					text-decoration:	none;
-					}
-	</style>
+<style>
+	body			{
+				background-color:	#30304d;
+				color:			#f90029;
+				}
+	div.Station		{
+				border:			1px solid #f90029;
+				width:			100%;
+				cursor:			pointer;
+				}
+	div.Station:Hover	{
+				background-color:	#84a9d7;
+				}
+	div.Station a		{
+				text-decoration:	none;
+				}
+</style>
 
+<body>
 	<script src="../static/Player.js"></script>
 
 {% for Station in Stations %}
-		<div class=Station>
+		<div class=Station onClick="javascript:play('{{ Station.playlist }}');">
 			<b>{{ Station.frequency }} MHz</b>
-			<a href="javascript:play('{{ Station.stream }}');">stream</a>
-			<a href="javascript:play('{{ Station.playlist }}');">playlist</a>
 			<img class=Logo src="Logo?ID={{ Station.id }}"/>
 			{{ Station.name }}
+			<a href="javascript:play('{{ Station.playlist }}');"><img src="../static/play.png"/></a>
+			<a href="javascript:play('{{ Station.stream }}');">(direct link)</a>
 		</div>
 		<br/>
 {% endfor %}
