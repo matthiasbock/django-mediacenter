@@ -15,7 +15,7 @@
 					font-size:		9pt;
 					}
 	#TitleList tr.Hover:hover	{
-					background:		#4cbafb;
+					background:		#84a9d7;
 					font-color:		#234956;
 					}
 	#TitleList td			{
@@ -59,7 +59,7 @@
 		<tr class=Hover>
 			<td>
 			{% for URL in Title.URLs %}
-			<a href="javascript:play('{{ URL.url }}');"><img src="/Django/MediaCenter/static/play.png"/></a>
+			<a href="javascript:play(resolve('{{ URL.url }}'));"><img src="/Django/MediaCenter/static/play.png"/></a>
 			{% endfor %}
 
 <!--			Suchen:
