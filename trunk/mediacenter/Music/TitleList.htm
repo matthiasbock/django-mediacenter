@@ -7,7 +7,7 @@
 					right:			20px;
 					width:			50px;
 					height:			50px;
-					background-color:	#red;
+					background-color:	red;
 					color:			white;
 					font-size:		30pt;
 					}
@@ -22,7 +22,7 @@
 					max-width:		250px;
 					}
 	#TitleList a			{
-					color:			blue;
+					color:			#fff364;
 					text-decoration: 	none;
 					}
 	#TitleList a:hover		{
@@ -59,7 +59,7 @@
 		<tr class=Hover>
 			<td>
 			{% for URL in Title.URLs %}
-			<a href="javascript:play(resolve('{{ URL.url }}'));"><img src="/Django/MediaCenter/static/play.png"/></a>
+			<a href="javascript:insertplayer(extractplayer('{{ URL.url }}'));"><img src="/Django/MediaCenter/static/play.png"/></a>
 			{% endfor %}
 
 <!--			Suchen:

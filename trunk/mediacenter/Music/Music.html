@@ -1,5 +1,18 @@
-{% extends "MusicTemplate.html" %}
+<html>
 
+<style>
+	body		{
+			background-color:	#30304d;
+			color:			grey;
+			}
+	table		{
+			color:			grey;
+			}
+</style>
+
+<body>
+<center>
+<br/>
 {% block main %}
 	{% block Details %}{% endblock %}
 	<!-- Title List -->
@@ -8,8 +21,11 @@
 	{% include 'TitleList.htm' %}
 	<!-- end Title List -->
 {% endblock %}
-
+<br/>
 {% block footer %}
 	<a href="#">[ Liste als M3U herunterladen ]</a>
 {% endblock %}
+</center>
+</body>
 
+</html>
