@@ -1,0 +1,32 @@
+<html>
+
+<body>
+	<style>
+		div.Station		{
+					border:			1px solid black;
+					width:			100%;
+					}
+		div.Station:Hover	{
+					background-color:	#84a9d7;
+					}
+		div.Station a		{
+					text-decoration:	none;
+					}
+	</style>
+
+	<script src="../static/Player.js"></script>
+
+{% for Station in Stations %}
+		<div class=Station>
+			<b>{{ Station.frequency }} MHz</b>
+			<a href="javascript:play('{{ Station.stream }}');">stream</a>
+			<a href="javascript:play('{{ Station.playlist }}');">playlist</a>
+			<img class=Logo src="Logo?ID={{ Station.id }}"/>
+			{{ Station.name }}
+		</div>
+		<br/>
+{% endfor %}
+</body>
+
+</html>
+
