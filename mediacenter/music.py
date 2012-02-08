@@ -12,32 +12,27 @@ def index(request):
 
 def export_title( T ):			# exportiert ein Template-übergebbares Dictionary für diesen Title-Eintrag
 	URLs = []
-	for URL in Online.objects.using(MediaCenterDB).filter( title=T.id ):
-#		URLs.append( { "url":URL.link+"&use=cache", "hoster":"Local" } )
+	for URL in TitleStreams.objects.using(MediaCenterDB).filter( title=T.id ):
 		URLs.append( { "url":URL.link, "hoster":URL.link.replace("http://","").replace(".","/").split("/")[1] } )
-	Track = T.track
-	if Track == 0:
-		Track = ""
-	return { "id":T.id, "composer":T.composer, "performer":T.performer, "album":T.album, "track":Track, "title":T.title, "URLs":URLs }
+	return { "id":T.id, "composer":T.composer, "performer":T.performer, "title":T.title, "URLs":URLs }
 
 
 def TitleList( request ):
 	if request.method == "GET":						# return a list of all titles
 		params = {}
 		params["Titles"] = []
-		for T in Titles.objects.using(MediaCenterDB).all().order_by('album','track','composer','performer','title'):
-			params["Titles"].append( export_title(T) )
+		for T in Titles.objects.using(MediaCenterDB).all().order_by('played','composer','performer','title'):
+			title = export_title(T)
+			title['number'] = len(params['Titles'])
+			params["Titles"].append(title)
+		params['TitleCount'] = len(params['Titles'])
 		return render_to_response("Music.html", params)
 
 	elif request.method == "POST":						# add a new title
-		try:
-			Track = int(request.POST.get("Track"))
-		except:
-			Track = 0
-		Titles.objects.using(MediaCenterDB).create( composer=request.POST.get("Composer"), performer=request.POST.get("Performer"), album=request.POST.get("Album"), track=Track, title=request.POST.get("Title") )
-		T = Titles.objects.using(MediaCenterDB).get( composer=request.POST.get("Composer"), performer=request.POST.get("Performer"), album=request.POST.get("Album"), title=request.POST.get("Title") )
+		Titles.objects.using(MediaCenterDB).create( composer=request.POST.get("Composer"), performer=request.POST.get("Performer"), title=request.POST.get("Title") )
+		T = Titles.objects.using(MediaCenterDB).get( composer=request.POST.get("Composer"), performer=request.POST.get("Performer"), title=request.POST.get("Title") )
 		if request.POST.get("URL") != "":
-			Urls.objects.using(MediaCenterDB).create( title=T.id, url=request.POST.get("URL") )
+			TitleStreams.objects.using(MediaCenterDB).create( title=T.id, link=request.POST.get("URL") )
 		return HttpResponseRedirect("Details?Database=Performers&Name="+request.POST.get("Performer"))
 
 
@@ -103,7 +98,7 @@ def Details( request ):
 		results = Titles.objects.using(MediaCenterDB).filter( album=Name )
 
 	params["Titles"] = []
-	for T in results.order_by( 'album','track','composer','title' ):
+	for T in results.order_by( 'composer','title' ):
 		params["Titles"].append( export_title(T) )
 
 	return render_to_response("Details.html", params)
@@ -115,12 +110,12 @@ def Icon( request ):
 		Name = request.GET.get("Name")
 		try:
 			if Database == "Composers":
-				DB = Composers
+				table = ArtistIcons
 			elif Database == "Performers":
-				DB = Performers
+				table = ArtistIcons
 			elif Database == "Albums":
-				DB = Albums
-			Icon = DB.objects.using(MediaCenterDB).get( name=Name ).icon
+				table = Albums
+			Icon = table.objects.using(MediaCenterDB).get( name=Name ).icon
 			mime = "image/jpeg"
 		except:
 			Icon = open("/var/www/Django/mediacenter/static/system-search.png", "r").read()
@@ -141,17 +136,17 @@ def Icon( request ):
 		connection.close()
 
 		if Database == "Composers":
-			DB = Composers
+			table = ArtistIcons
 		elif Database == "Performers":
-			DB = Performers
+			table = ArtistIcons
 		elif Database == "Albums":
-			DB = Albums
+			table = Albums
 
 		try:
-			DB.objects.using(MediaCenterDB).get( name=Name ).delete()	# delete old Icon, if present
+			table.objects.using(MediaCenterDB).get( name=Name ).delete()	# delete old Icon, if present
 		except:
 			pass
-		DB.objects.using(MediaCenterDB).create( name=Name, icon=Picture )
+		table.objects.using(MediaCenterDB).create( name=Name, icon=Picture )
 
 		return HttpResponseRedirect("Details?Database="+Database+"&Name="+Name)
 

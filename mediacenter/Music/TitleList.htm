@@ -14,6 +14,14 @@
 	#TitleList table		{
 					font-size:		9pt;
 					}
+	#TitleList .search		{
+					border:			1px dotted white;
+					background-color:	transparent;
+					width:			100%;
+					height:			20px;
+					color:			white;
+					font-size:		8pt;
+					}
 	#TitleList tr.Hover:hover	{
 					background:		#84a9d7;
 					font-color:		#234956;
@@ -38,11 +46,33 @@
 					background-color: 	#22ff22;
 					text-decoration: 	none;
 					}
-	#TitleList img			{
-					border:			none;
+	#TitleList .PlayBtn		{
+					border:			1px solid transparent;
 					height:			15px;
 					}
+	#TitleList .PlayBtn:hover	{
+					border:			1px dotted white;
+					}
 </style>
+
+<script>
+	function Search(event) {
+		needle = event.srcElement.value;
+		for (i=0; i<parseInt(document.getElementById('TitleCount').value); i++) {
+			title = document.getElementById('title'+i);
+			composer = document.getElementById(event.srcElement.id+i).innerHTML;
+			matches = false;
+			if ( needle == '' ) 	matches = true
+					else	matches = composer.toUpperCase().indexOf(needle.toUpperCase()) > -1;
+			if ( matches )	{
+					title.style.display = 'table-row';
+					}
+				else	{
+					title.style.display = 'none';
+					}
+			}
+		}
+</script>
 
 <div id=TitleList>
 	<input type=button class=AddTitleButton value="+" onClick="AddTitle();" />
@@ -52,30 +82,35 @@
 			<th align=left></th>
 			<th>Komponist</th>
 			<th>Darbietender K&uuml;nstler</th>
-			<th>Album</th>
-			<th colspan=2>Titel</th>
+			<th>Titel</th>
+			<th></th>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type=text class=search id=composer onKeyUp="Search(event);" /></td>
+			<td><input type=text class=search id=performer onKeyUp="Search(event);" /></td>
+			<td><input type=text class=search id=title onKeyUp="Search(event);" /></td>
+			<td></td>
 		</tr>
 	{% for Title in Titles %}
-		<tr class=Hover>
+		<tr class=Hover id='title{{ Title.number }}'>
 			<td>
-			{% for URL in Title.URLs %}
-			<a href="javascript:insertplayer(extractplayer('{{ URL.url }}'));"><img src="/Django/MediaCenter/static/play.png"/></a>
-			{% endfor %}
-
-<!--			Suchen:
-			<a class=Provider target="_blank" href="http://www.myvideo.de/Videos_A-Z?searchChannelID=15&searchChannel=Musik&searchOrder=0&searchWord={{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">		<img src="/Django/MediaCenter/static/MyVideo.png" />		</a>
-			<a class=Provider target="_blank" href="http://www.youtube.com/results?gl=DE&hl=de&search_query={{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">	<img src="/Django/MediaCenter/static/YouTube.png" />		</a>
-			<a class=Provider target="_blank" href="http://www.dailymotion.com/relevance/search/{{ Title.composer|urlencode }}%20{{ Title.performer|urlencode }}%20{{ Title.album|urlencode }}%20{{ Title.title }}">		<img src="/Django/MediaCenter/static/dailymotion.png" />	</a>
-			<input type=button style="width:40px;" value="+" onClick="AddURL('{{Title.id}}','{{Title.composer}}','{{Title.performer}}','{{Title.album}}','{{Title.title}}');" />-->
+				<input type=checkbox>
 			</td>
 
-			<td align=center><a class=green href="Details?Database=Composers&Name={{ Title.composer|urlencode }}">{{ Title.composer }}</a></td>
-			<td align=center><a class=green href="Details?Database=Performers&Name={{ Title.performer|urlencode }}">{{ Title.performer }}</a></td>
-			<td align=center><a class=green href="Details?Database=Albums&Name={{ Title.album|urlencode }}">{{ Title.album }}</a></td>
-			<td align=center> {{ Title.track }} </td>
-			<td align=center> {{ Title.title }} </td>
+			<td align=center><a class=green href="Details?Database=Composers&Name={{ Title.composer|urlencode }}"><label id='composer{{ Title.number }}'>{{ Title.composer }}</label></a></td>
+			<td align=center><a class=green href="Details?Database=Performers&Name={{ Title.performer|urlencode }}"><label id='performer{{ Title.number }}'>{{ Title.performer }}</label></a></td>
+			<td align=center><label id='title{{ Title.number }}'>{{ Title.title }}</label></td>
+
+			<td>
+			{% for URL in Title.URLs %}
+			<a href="javascript:insertplayer(extractplayer('{{ URL.url }}'));"><img class=PlayBtn src="/Django/MediaCenter/static/play.png"/></a>
+			{% endfor %}
+			</td>
 		</tr>
 	{% endfor %}
 	</table>
 </div>
+
+<input type=hidden id=TitleCount value='{{ TitleCount }}'/>
 
