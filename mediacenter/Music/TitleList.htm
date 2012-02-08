@@ -1,7 +1,17 @@
 <script src="../static/Player.js"></script>
 
 <style>
-	#TitleList input.AddTitleButton {
+	.TitleBox			{
+					border:			1px dotted white;
+					width:			80%;
+					}
+	#TitleList			{
+					height:			75%;
+					overflow-x:		hidden;
+					overflow-y:		scroll;
+					}
+
+	#AddTitleButton			{
 					position:		fixed;
 					top:			20px;
 					right:			20px;
@@ -11,10 +21,12 @@
 					color:			white;
 					font-size:		30pt;
 					}
-	#TitleList table		{
+	.TitleTable			{
+					border:			none;
 					font-size:		9pt;
+					width:			100%;
 					}
-	#TitleList .search		{
+	.search				{
 					border:			1px dotted white;
 					background-color:	transparent;
 					width:			100%;
@@ -27,8 +39,9 @@
 					font-color:		#234956;
 					}
 	#TitleList td			{
-					max-width:		250px;
+					text-align:		center;
 					}
+
 	#TitleList a			{
 					color:			#fff364;
 					text-decoration: 	none;
@@ -46,11 +59,12 @@
 					background-color: 	#22ff22;
 					text-decoration: 	none;
 					}
-	#TitleList .PlayBtn		{
+
+	.PlayBtn			{
 					border:			1px solid transparent;
 					height:			15px;
 					}
-	#TitleList .PlayBtn:hover	{
+	.PlayBtn:hover			{
 					border:			1px dotted white;
 					}
 </style>
@@ -61,6 +75,7 @@
 		for (i=0; i<parseInt(document.getElementById('TitleCount').value); i++) {
 			title = document.getElementById('title'+i);
 			composer = document.getElementById(event.srcElement.id+i).innerHTML;
+			checkbox = document.getElementById('checkbox'+i);
 			matches = false;
 			if ( needle == '' ) 	matches = true
 					else	matches = composer.toUpperCase().indexOf(needle.toUpperCase()) > -1;
@@ -68,22 +83,34 @@
 					title.style.display = 'table-row';
 					}
 				else	{
+					checkbox.checked = false;
 					title.style.display = 'none';
 					}
 			}
 		}
+
+	function Select(event) {
+		id = event.srcElement.parentNode.id;
+		i = id.substr(5, id.length-5);
+		box = document.getElementById('checkbox'+i);
+		box.checked = ! ( box.checked == 1 );
+		}
 </script>
 
-<div id=TitleList>
-	<input type=button class=AddTitleButton value="+" onClick="AddTitle();" />
+<div class=TitleBox id=Buttons>
+	<input type=button id="DelTitle" value="X" onClick="DelTitle();" />
+	<input type=button id="AddTitle" value="+" onClick="showAddTitleWindow();" />
+	<input type=hidden id="TitleCount" value='{{ TitleCount }}'/>
+</div>
 
-	<table border=0 cellpadding=5 cellspacing=0>
+<div class=TitleBox id=Heading>
+	<table class=TitleTable cellpadding=5 cellspacing=0>
 		<tr>
-			<th align=left></th>
-			<th>Komponist</th>
-			<th>Darbietender K&uuml;nstler</th>
-			<th>Titel</th>
-			<th></th>
+			<th width="5%"></th>
+			<th width="28%">Komponist</th>
+			<th width="28%">Darbietender K&uuml;nstler</th>
+			<th width="28%">Titel</th>
+			<th width="10%"></th>
 		</tr>
 		<tr>
 			<td></td>
@@ -92,25 +119,27 @@
 			<td><input type=text class=search id=title onKeyUp="Search(event);" /></td>
 			<td></td>
 		</tr>
+	</table>
+</div>
+
+<div class=TitleBox id=TitleList>
+	<table class=TitleTable cellpadding=5 cellspacing=0>
 	{% for Title in Titles %}
-		<tr class=Hover id='title{{ Title.number }}'>
-			<td>
-				<input type=checkbox>
+		<tr class=Hover id='title{{ Title.number }}' onClick='Select(event);'>
+			<td width="5%">
+				<input type=checkbox id='checkbox{{ Title.number }}' />
 			</td>
 
-			<td align=center><a class=green href="Details?Database=Composers&Name={{ Title.composer|urlencode }}"><label id='composer{{ Title.number }}'>{{ Title.composer }}</label></a></td>
-			<td align=center><a class=green href="Details?Database=Performers&Name={{ Title.performer|urlencode }}"><label id='performer{{ Title.number }}'>{{ Title.performer }}</label></a></td>
-			<td align=center><label id='title{{ Title.number }}'>{{ Title.title }}</label></td>
+			<td width="28%"><a class=green href="Details?Database=Composers&Name={{ Title.composer|urlencode }}"><label id='composer{{ Title.number }}'>{{ Title.composer }}</label></a></td>
+			<td width="28%"><a class=green href="Details?Database=Performers&Name={{ Title.performer|urlencode }}"><label id='performer{{ Title.number }}'>{{ Title.performer }}</label></a></td>
+			<td width="28%"><label id='title{{ Title.number }}'>{{ Title.title }}</label></td>
 
-			<td>
+			<td width="10%">
 			{% for URL in Title.URLs %}
 			<a href="javascript:insertplayer(extractplayer('{{ URL.url }}'));"><img class=PlayBtn src="/Django/MediaCenter/static/play.png"/></a>
 			{% endfor %}
 			</td>
-		</tr>
-	{% endfor %}
+		</tr>{% endfor %}
 	</table>
 </div>
-
-<input type=hidden id=TitleCount value='{{ TitleCount }}'/>
 

@@ -11,13 +11,12 @@ MediaCenterDB = 'django-mediacenter'
 import httplib, os, imdb
 from operator import itemgetter
 
-
 def Listing( request ):
 	cols = 4
 	params = {}
 	params["rows"] = []
 	col = cols
-	for M in Movies.objects.using(MediaCenterDB).all().order_by("original"):
+	for M in Movies.objects.using(MediaCenterDB).all().order_by("original_title"):
 		col += 1
 		if col > cols:
 			col = 1
@@ -72,7 +71,7 @@ def AddMovie( request ):
 	else:
 		Picture = None
 
-	Movies.objects.using(MediaCenterDB).create( original=request.POST.get("Original"), german=request.POST.get("German"), year=request.POST.get("Year"), icon=Picture, rating=None )
+	Movies.objects.using(MediaCenterDB).create( original_title=request.POST.get("Original"), german_title=request.POST.get("German"), year=request.POST.get("Year"), icon=Picture )
 	return HttpResponseRedirect(".")
 
 
