@@ -9,12 +9,12 @@
 
 from django.db import models
 
-class ComposerIcons(models.Model):
+class ArtistIcons(models.Model):
     id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
     name = models.CharField(max_length=300, db_column='Name') # Field name made lowercase.
     icon = models.TextField(db_column='Icon', blank=True) # Field name made lowercase.
     class Meta:
-        db_table = u'Composer_Icons'
+        db_table = u'Artist_Icons'
 
 class Movies(models.Model):
     id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
@@ -25,13 +25,6 @@ class Movies(models.Model):
     icon = models.TextField(db_column='Icon', blank=True) # Field name made lowercase.
     class Meta:
         db_table = u'Movies'
-
-class PerformerIcons(models.Model):
-    id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
-    name = models.CharField(max_length=300, db_column='Name') # Field name made lowercase.
-    icon = models.TextField(db_column='Icon', blank=True) # Field name made lowercase.
-    class Meta:
-        db_table = u'Performer_Icons'
 
 class Playlists(models.Model):
     id = models.IntegerField(primary_key=True, db_column='ID') # Field name made lowercase.
