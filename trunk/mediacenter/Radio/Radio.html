@@ -5,29 +5,35 @@
 				background-color:	#30304d;
 				color:			#f90029;
 				}
-	div.Station		{
-				border:			1px solid #f90029;
-				width:			100%;
+	.Station		{
+				border:			1px dotted #f90029;
+				width:			60%;
 				cursor:			pointer;
 				}
-	div.Station:Hover	{
+	.Station:hover		{
+				color:			white;
 				background-color:	#84a9d7;
 				}
-	div.Station a		{
-				text-decoration:	none;
+	.Logo			{
+				vertical-align:		middle;
 				}
 </style>
 
 <body>
 	<script src="../static/Player.js"></script>
+	<br/>
+	<br/>
+	<br/>
+	<center>
 
 {% for Station in Stations %}
 		<div class=Station onClick="javascript:play('{{ Station.playlist }}');">
+			&nbsp;&nbsp;
 			<b>{{ Station.frequency }} MHz</b>
+			&nbsp;&nbsp;
 			<img class=Logo src="Logo?ID={{ Station.id }}"/>
+			&nbsp;&nbsp;
 			{{ Station.name }}
-			<a href="javascript:play('{{ Station.playlist }}');"><img src="../static/play.png"/></a>
-			<a href="javascript:play('{{ Station.stream }}');">(direct link)</a>
 		</div>
 		<br/>
 {% endfor %}

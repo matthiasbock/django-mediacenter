@@ -1,23 +1,23 @@
 <style>
 	#AddTitleDiv			{
-					background-color: #0000aa;
-					position:	fixed;
-					top:		300px;
-					text-align:	right;
-					overflow:	hidden;
-					visibility:	hidden;
-					padding:	8px;
+					background-color:	#0000aa;
+					position:		fixed;
+					top:			300px;
+					text-align:		right;
+					overflow:		hidden;
+					visibility:		hidden;
+					padding:		8px;
 					}
 	#AddTitleDiv table 		{
-					border:1px solid #ffffff;
-					width:		100%;
+					border:			1px solid #ffffff;
+					width:			100%;
 					}
 	#AddTitleDiv td			{
-					font-size:	9pt; 
-					color:		white;
+					font-size:		9pt; 
+					color:			white;
 					}
 	#AddTitleDiv input:hover 	{
-					background-color: #ff0000;
+					background-color:	 #ff0000;
 					}
 </style>
 
@@ -64,7 +64,7 @@
 	AddTitleDiv = document.getElementById('AddTitleDiv');
 	AddTitleDiv.style.left = (document.body.clientWidth - AddTitleDiv.offsetWidth) / 2;
 
-	function AddTitle() {
+	function showAddTitleWindow() {
 		AddTitleDiv = document.getElementById('AddTitleDiv');
 		AddTitleDiv.style.visibility = 'visible';
 		document.AddTitleForm.Composer.focus();
