@@ -2,6 +2,7 @@
 
 <style>
 	body		{
+			color:			white;
 			background-color:	#363683;
 			margin:			0px;
 			padding:		0px;
@@ -10,21 +11,11 @@
 	#Logo		{
 			position:		absolute;
 			left:			20px;
-			top:			2px;
-			color:			grey;
+			top:			0px;
+			color:			white;
 			font-family:		"URW Chancery L";
-			font-size:		60px;
+			font-size:		50px;
 			text-shadow:		blue 3px 3px 5px;
-			}
-	#Hoster		{
-			position:		absolute;
-			top:			8px;
-			right:			8px;
-			font-size:		7pt;
-			}
-	table		{
-			color:			grey;
-			font-size:		11pt;
 			}
 	a		{
 			color:			#fff364;
@@ -34,11 +25,25 @@
 			}
 	a:hover		{
 			background:		#22ff22;
-			color:			grey;
+			color:			black;
 			text-decoration: 	none;
 			}
+	table		{
+			position:		absolute;
+			left:			40%;
+			top:			0px;
+			font-size:		10pt;
+			}
 	td		{
-			border:			none;
+			border:			1px dotted white;
+			padding:		0px;
+			margin:			0px;
+			}
+	#Links		{
+			position:		absolute;
+			top:			8px;
+			right:			8px;
+			font-size:		7pt;
 			}
 </style>
 
@@ -50,8 +55,14 @@
 			<td>Musik:</td>
 			<td>
 				<a target=Main href="Music/TitleList">Titel</a>
+			</td>
+			<td>
 				<a target=Main href="Music/IconListing?Database=Composers">Komponisten</a>
+			</td>
+			<td>
 				<a target=Main href="Music/IconListing?Database=Performers">K&uuml;nstler</a>
+			</td>
+			<td>
 				<a target=Main href="Music/IconListing?Database=Albums">Alben</a>
 			</td>
 		</tr>
@@ -67,7 +78,8 @@
 			</td>
 		</tr>
 	</table>
-	<div id=Hoster>
+
+	<div id=Links>
 		<a href="/phpmyadmin/index.php?db=django-mediacenter">phpmyadmin</a>
 	</div>
 </body>
