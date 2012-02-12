@@ -3,6 +3,7 @@ from django.conf.urls.defaults import patterns, include, url
 urlpatterns = patterns('',
 	(r'^MediaCenter/$',				"Django.mediacenter.main.index"),
 
+	(r'^MediaCenter/Menu$',				"Django.mediacenter.main.menu"),
 	(r'^MediaCenter/Playlist$',			"Django.mediacenter.player.Playlist"),
 	(r'^MediaCenter/Player$',			"Django.mediacenter.player.Player"),
 

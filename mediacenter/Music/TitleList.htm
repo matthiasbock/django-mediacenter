@@ -49,6 +49,7 @@
 	#TitleList a:hover		{
 					color:			blue;
 					text-decoration: 	underline;
+					cursor:			pointer;
 					}
 	#TitleList a.Provider		{
 					text-decoration:	none;
@@ -136,7 +137,7 @@
 
 			<td width="10%">
 			{% for URL in Title.URLs %}
-			<a href="javascript:insertplayer(extractplayer('{{ URL.url }}'));"><img class=PlayBtn src="/Django/MediaCenter/static/play.png"/></a>
+			<a target=Player href="../Player?Link={{ URL.url }}"><img class=PlayBtn alt="Play now!" src="/Django/MediaCenter/static/play.png"/></a>
 			{% endfor %}
 			</td>
 		</tr>{% endfor %}
