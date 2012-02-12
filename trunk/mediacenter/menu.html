@@ -1,0 +1,76 @@
+<html>
+
+<style>
+	body		{
+			background-color:	#363683;
+			margin:			0px;
+			padding:		0px;
+			overflow:		hidden;
+			}
+	#Logo		{
+			position:		absolute;
+			left:			20px;
+			top:			2px;
+			color:			grey;
+			font-family:		"URW Chancery L";
+			font-size:		60px;
+			text-shadow:		blue 3px 3px 5px;
+			}
+	#Hoster		{
+			position:		absolute;
+			top:			8px;
+			right:			8px;
+			font-size:		7pt;
+			}
+	table		{
+			color:			grey;
+			font-size:		11pt;
+			}
+	a		{
+			color:			#fff364;
+			text-decoration: 	none;
+			padding-left:		5px;
+			padding-right:		5px;
+			}
+	a:hover		{
+			background:		#22ff22;
+			color:			grey;
+			text-decoration: 	none;
+			}
+	td		{
+			border:			none;
+			}
+</style>
+
+<body>
+	<label id=Logo>Kalmar</label>
+
+	<table>
+		<tr>
+			<td>Musik:</td>
+			<td>
+				<a target=Main href="Music/TitleList">Titel</a>
+				<a target=Main href="Music/IconListing?Database=Composers">Komponisten</a>
+				<a target=Main href="Music/IconListing?Database=Performers">K&uuml;nstler</a>
+				<a target=Main href="Music/IconListing?Database=Albums">Alben</a>
+			</td>
+		</tr>
+			<td></td>
+			<td>
+				<a target=Main href="Radio/">Radio</a>
+			</td>
+		</tr>
+		</tr>
+			<td></td>
+			<td>
+				<a target=Main href="Movies/">Filme</a>
+			</td>
+		</tr>
+	</table>
+	<div id=Hoster>
+		<a href="/phpmyadmin/index.php?db=django-mediacenter">phpmyadmin</a>
+	</div>
+</body>
+
+</html>
+
