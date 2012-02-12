@@ -21,12 +21,8 @@
 
 <body>
 	<center>
-	<script src='static/Player.js'></script>
-
-	{{ Link }}
-
-	</center>
-
+	<!--{{ Link }}<br/-->
+	{% autoescape off %}{{ Player }}{% endautoescape %}
 </body>
 
 </html>
