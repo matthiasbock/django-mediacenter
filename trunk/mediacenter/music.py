@@ -12,9 +12,11 @@ def index(request):
 
 def export_title( T ):			# exportiert ein Template-übergebbares Dictionary für diesen Title-Eintrag
 	URLs = []
+	mainURL = ''
 	for URL in TitleStreams.objects.using(MediaCenterDB).filter( title=T.id ):
+		mainURL = URL.link
 		URLs.append( { "url":URL.link, "hoster":URL.link.replace("http://","").replace(".","/").split("/")[1] } )
-	return { "id":T.id, "composer":T.composer, "performer":T.performer, "title":T.title, "URLs":URLs }
+	return { "id":T.id, "composer":T.composer, "performer":T.performer, "title":T.title, "URLs":URLs, "mainurl":mainURL }
 
 
 def TitleList( request ):

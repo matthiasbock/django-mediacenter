@@ -136,7 +136,7 @@
 
 			<td width="28%"><a class=green href="Details?Database=Composers&Name={{ Title.composer|urlencode }}"><label id='composer{{ Title.number }}'>{{ Title.composer }}</label></a></td>
 			<td width="28%"><a class=green href="Details?Database=Performers&Name={{ Title.performer|urlencode }}"><label id='performer{{ Title.number }}'>{{ Title.performer }}</label></a></td>
-			<td width="28%"><label id='title{{ Title.number }}'>{{ Title.title }}</label></td>
+			<td width="28%"><a href="{{ Title.mainurl }}"><label id='title{{ Title.number }}'>{{ Title.title }}</label></a></td>
 
 			<td width="10%">
 			{% for URL in Title.URLs %}
