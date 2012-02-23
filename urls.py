@@ -6,6 +6,7 @@ urlpatterns = patterns('',
 	(r'^MediaCenter/Menu$',				"Django.mediacenter.main.menu"),
 	(r'^MediaCenter/Playlist$',			"Django.mediacenter.player.Playlist"),
 	(r'^MediaCenter/Player$',			"Django.mediacenter.player.Player"),
+	(r'^MediaCenter/GetDirectLink$',		"Django.mediacenter.player.GetDirectLink"),
 
 	(r'^MediaCenter/Music/$',			"Django.mediacenter.music.index"),
 	(r'^MediaCenter/Music/TitleList$',		"Django.mediacenter.music.TitleList"),

@@ -8,17 +8,10 @@
 			padding:		0px;
 			overflow:		hidden;
 			}
-	label		{
-			color:			white;
-			}
 </style>
 
-<script src='static/youtube.js'></script>
-
-<body onLoad="resolve('http://www.youtube.com/watch?v=-plU0fUO0pE');">
-	{{ Link }}
-	<label id=label></label>
-	{% autoescape off %}{{ Player }}{% endautoescape %}
+<body>
+{% autoescape off %}{{ Player }}{% endautoescape %}
 </body>
 
 </html>
