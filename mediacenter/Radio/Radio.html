@@ -6,13 +6,23 @@
 				color:			#f90029;
 				}
 	.Station		{
-				border:			1px dotted #f90029;
-				width:			60%;
+				border:			2px dotted #f90029;
+				width:			80%;
 				cursor:			pointer;
 				}
 	.Station:hover		{
+				border:			2px solid white;
 				color:			white;
 				background-color:	#84a9d7;
+				}
+	.Station table		{
+				background-color:	#50506d;
+				width:			100%;
+				}
+	.Station table a	{
+				color:			#f90029;
+				text-decoration:	none;
+				font-weight:		bold;
 				}
 	.Logo			{
 				vertical-align:		middle;
@@ -20,22 +30,31 @@
 </style>
 
 <body>
-	<script src="../static/Player.js"></script>
-	<br/>
-	<br/>
-	<br/>
 	<center>
-
+	<br/>
 {% for Station in Stations %}
-		<div class=Station onClick="javascript:play('{{ Station.playlist }}');">
-			&nbsp;&nbsp;
-			<b>{{ Station.frequency }} MHz</b>
-			&nbsp;&nbsp;
-			<img class=Logo src="Logo?ID={{ Station.id }}"/>
-			&nbsp;&nbsp;
-			{{ Station.name }}
-		</div>
-		<br/>
+	<div class=Station>
+	<table>
+		<tr>
+			<td width="40%">
+				<a href="../Player?Link={{ Station.playlist }}" target=Player>
+				<img class=Logo src="Logo?ID={{ Station.id }}"/>
+				</a>
+			</td>
+			<td width="*">
+				<a href="../Player?Link={{ Station.playlist }}" target=Player>
+				{{ Station.name }}
+				</a>
+			</td>
+			<td width="15%">
+				<a href="../Player?Link={{ Station.playlist }}" target=Player>
+				{{ Station.frequency }}
+				</a>
+			</td>
+		</tr>
+	</table>
+	</div>
+	<br/>
 {% endfor %}
 </body>
 
