@@ -9,7 +9,13 @@ MediaCenterDB = 'django-mediacenter'
 
 def Listing( request ):
 	params = {}
-	params["Stations"] = RadioStreams.objects.using(MediaCenterDB).all().order_by("frequency")
+	params["Stations"] = []
+	for Stream in RadioStreams.objects.using(MediaCenterDB).all().order_by("frequency"):
+		if Stream.frequency == 0:
+			Stream.frequency = 'Internet'
+		else:
+			Stream.frequency = str(Stream.frequency)+' MHz'
+		params["Stations"].append(Stream)
 	return render_to_response("Radio.html", params)
 
 def Icon( request ):
