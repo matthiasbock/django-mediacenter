@@ -1,14 +1,6 @@
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    ('webmaster', 'webmaster@localhost'),
-)
-
-MANAGERS = ADMINS
-
-DATABASE = {
-	'django-mediacenter': {
+DATABASES = {
+	'default': {
 		'ENGINE':	'django.db.backends.mysql',
 		'NAME':		'django-mediacenter',
 		'USER': 	'Django',
@@ -17,7 +9,26 @@ DATABASE = {
 		'PORT':		'',
 		}
 	}
-DATABASES = { 'default': DATABASE['django-mediacenter'] }
+DATABASES['django-mediacenter'] = DATABASES['default']
+
+home = '/home/code/django-mediacenter/'
+TEMPLATE_DIRS = (
+		home,
+		home+"Music/",
+		home+"Movies/",
+		home+"Radio/",
+		home+"Player/",
+		)
+
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = (
+    ('webmaster', 'webmaster@localhost'),
+)
+
+MANAGERS = ADMINS
 
 SECRET_KEY = ''
 
@@ -51,14 +62,6 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'Django.urls'
 
-TEMPLATE_DIRS = (
-	"/var/www/Django/mediacenter/",
-	"/var/www/Django/mediacenter/Music/",
-	"/var/www/Django/mediacenter/Movies/",
-	"/var/www/Django/mediacenter/Radio/",
-	"/var/www/Django/mediacenter/Player/",
-)
-
 INSTALLED_APPS = (
 #    'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -72,25 +75,3 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    }
-}
